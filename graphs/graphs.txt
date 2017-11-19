@@ -1,8 +1,33 @@
-Topological Sorting:
+Topological Sorting for DAG:
 
-1. Push a vertex to stack only after all of its vertices are visited.
-2. Once the whole traversal is done, print stack.
+1) Push a vertex to stack only after all of its vertices are visited.
+2) Once the whole traversal is done, print stack.
 
 Time: O(V+E) Space: O(V)
+
+Bellman-Ford Shortest Path for Negative Weights:
+
+1) List all edges.
+2) For every edge u->v, relax(v) (if d[v] > d[u]+w[u,v], then update d[v])
+
+Longest path in DAG:
+
+1) Create a toplogical order of all vertices.
+2) Do following for every vertex u in topological order.
+   Do following for every adjacent vertex v of u
+   		if (dist[v] < dist[u] + weight(u, v))
+			dist[v] = dist[u] + weight(u, v)
+3) Print dist[v].
+
+
+Find if there is a path of more than k length from a source
+
+1) Backtrack and do (k-curr_weight), and do not 
+repeat for visited vertex in that call stack.
+
+
+Djikstra's: I am visiting a vertex, it's the shortest distance already from any of its parent vertices, so if it was to be visited afterwards, the distance would anyway be greater than current.
+
+Topological sort: If I am at a vertex in the topologically sorted order, I have made sure that I have considered all the parent vertices and have calculated the shortest/greatest distance; after this it won't be visited afterwards.
 
 
