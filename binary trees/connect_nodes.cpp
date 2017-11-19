@@ -102,9 +102,12 @@ void connectRecur2(struct node* p)
 	{
 		p->right->nextRight = getNextRight(p);
 	}
-	connectRecur(p->nextRight);
+	connectRecur2(p->nextRight);
 
-	connectRecur(p->left);
+	if(p->left)
+		connectRecur2(p->left);
+	else
+		connectRecur2(p->right);
 }
 
 /* This function returns the leftmost child of nodes at the same level as p.
