@@ -12,6 +12,7 @@ void f(){
 	static int zerostatic = 0; // bss
 }
 
+/* these strings would be in text, these pointers would be pointing to a text memory */
 const char* conststring = "prashant"; // data
 char *nonconststring = "patil"; // data
 static const char* staticconststring = "prashant"; // data
