@@ -5,6 +5,7 @@ using namespace std;
 
 void DFS(std::vector< pair<int, int> >graph[], int src, std::vector<bool> &visited, 
 	int curr_len, int *length){
+
 	visited[src] = 1;
 	cout<<"src "<<src<<endl;
 
@@ -20,7 +21,7 @@ void DFS(std::vector< pair<int, int> >graph[], int src, std::vector<bool> &visit
 		if(!visited[set.first]){
 
 			curr_len += set.second;
-cout<<"curr_len "<<curr_len<<endl;
+			cout<<"curr_len "<<curr_len<<endl;
 			DFS(graph, set.first, visited, curr_len, length);
 
 			if(curr_len > *length){
@@ -28,6 +29,7 @@ cout<<"curr_len "<<curr_len<<endl;
 			}
 
 			curr_len -= set.second;
+			visited[set.first] = false; // this statement makes it work for cyclic graphs also
 
 		}
 
@@ -55,7 +57,7 @@ int main(int argc, char const *argv[])
 
 	graph[1].push_back(make_pair(2, 5));
 	graph[2].push_back(make_pair(3, 2));
-		graph[2].push_back(make_pair(1, 5));
+	graph[2].push_back(make_pair(1, 5));
 
 	// second edge
 

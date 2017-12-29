@@ -4,16 +4,14 @@ using namespace std;
 int findmajorityelement(int *arr, int size){
 	if(size==1)
 		return arr[0];
-	int cnt = 0;
-	cnt=1;
+	int cnt=1;
 	int elem = arr[0];
 	for (int i = 1; i < size; ++i)
 	{	
 		if(arr[i]==elem){
 			cnt++;
 			continue;
-		}
-		else{
+		}else{
 			cnt--;
 			if(cnt==0){
 				elem = arr[i];
@@ -51,9 +49,9 @@ int main(int argc, char const *argv[])
 		}
 
 		int ans = findmajorityelement(arr,s);
-		if(ans!=-1){
+		if(ans!=-1)
 			cout<<ans<<endl;
-		}else
+		else
 		printf("NO Majority Element\n");
 	}
 	return 0;

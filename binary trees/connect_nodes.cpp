@@ -84,8 +84,6 @@ void connectRecur2(struct node* p)
 	if (!p)
 		return;
 
-
-
     /* Set the nextRight pointer for p's left child */
 	if (p->left)
 	{
@@ -96,12 +94,10 @@ void connectRecur2(struct node* p)
 		}
 		else
 			p->left->nextRight = getNextRight(p);
-	}
-
-	if (p->right)
-	{
+	} else if (p->right) {
 		p->right->nextRight = getNextRight(p);
 	}
+
 	connectRecur2(p->nextRight);
 
 	if(p->left)
@@ -167,6 +163,8 @@ int main()
 	root->left->left->right	 = newnode(30);
 	root->right->right->left	 = newnode(60);
 	root->right->right->right = newnode(50);
+	root->right->right->left->left = newnode(80);
+	root->right->right->right->left = newnode(90);
 
 	// Populates nextRight pointer in all nodes
 	connect(root);
@@ -198,6 +196,11 @@ int main()
 	printf("nextRight of %d is %d \n", root->right->right->right->data,
 		root->right->right->right->nextRight? root->right->right->right->nextRight->data: -1);	
 	
+	printf("nextRight of %d is %d \n", root->right->right->left->left->data,
+		root->right->right->left->left->nextRight? root->right->right->left->left->nextRight->data: -1);	
+
+	printf("nextRight of %d is %d \n", root->right->right->right->left->data,
+		root->right->right->right->left->nextRight? root->right->right->right->left->nextRight->data: -1);	
 
 	connect2(root);
 	// Let us check the values of nextRight pointers
@@ -226,6 +229,12 @@ int main()
 
 	printf("nextRight of %d is %d \n", root->right->right->right->data,
 		root->right->right->right->nextRight? root->right->right->right->nextRight->data: -1);	
+
+	printf("nextRight of %d is %d \n", root->right->right->left->left->data,
+		root->right->right->left->left->nextRight? root->right->right->left->left->nextRight->data: -1);	
+
+	printf("nextRight of %d is %d \n", root->right->right->right->left->data,
+		root->right->right->right->left->nextRight? root->right->right->right->left->nextRight->data: -1);
 	
 	return 0;
 }
