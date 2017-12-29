@@ -5,6 +5,7 @@ int bvar; // bss
 static int cvar; // bss
 static int dvar = 2; // data
 static int globalzerostatic = 0; // bss
+const int *ptr = &bvar;
 
 void f(){
 	int notstatic;

@@ -1,16 +1,61 @@
+---------------------------
 Topological Sorting for DAG:
+---------------------------
 
 1) Push a vertex to stack only after all of its vertices are visited.
 2) Once the whole traversal is done, print stack.
 
+Code:
+
+topologicalSortUtil(int v, bool visited[], stack<int> &Stack)
+{
+	visited[v] = true; // Mark the current node as visited.
+ 
+    // Recur for all the vertices adjacent to this vertex
+    list<int>::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        if (!visited[*i])
+            topologicalSortUtil(*i, visited, Stack);
+ 
+    Stack.push(v); // Push current vertex to stack which stores result
+}
+
+topologicalSort()
+{
+    stack<int> Stack;
+ 
+    bool *visited = new bool[V];
+    for (int i = 0; i < V; i++)
+        visited[i] = false;
+ 
+    // For all sub-graphs
+    for (int i = 0; i < V; i++)
+      if (visited[i] == false)
+        topologicalSortUtil(i, visited, Stack);
+ 
+    // Print contents of stack
+    while (Stack.empty() == false)
+    {
+        cout << Stack.top() << " ";
+        Stack.pop();
+    }
+}
+
 Time: O(V+E) Space: O(V)
 
+
+-----------------------------------------------
 Bellman-Ford Shortest Path for Negative Weights:
+-----------------------------------------------
 
 1) List all edges.
 2) For every edge u->v, relax(v) (if d[v] > d[u]+w[u,v], then update d[v])
 
+We need to do it V-1 times, where V is the number of vertices.
+
+--------------------
 Longest path in DAG:
+--------------------
 
 1) Create a toplogical order of all vertices.
 2) Do following for every vertex u in topological order.
@@ -19,15 +64,28 @@ Longest path in DAG:
 			dist[v] = dist[u] + weight(u, v)
 3) Print dist[v].
 
-
-Find if there is a path of more than k length from a source
-
-1) Backtrack and do (k-curr_weight), and do not 
-repeat for visited vertex in that call stack.
+Why we can't do something like Shortest path?
+- If we don't sort it, we don't know which adjacent vertex to choose first and it may lead to a situation where we use distance of a vertex v to update distances of its adjacent vertices adj[v], but after that, the distance of vertex v gets updated, so vertices from adj[v] could also get bigger distances, but we won't visit them anymore.
 
 
-Djikstra's: I am visiting a vertex, it's the shortest distance already from any of its parent vertices, so if it was to be visited afterwards, the distance would anyway be greater than current.
+-----------------------------------------------------------
+Find if there is a path of more than k length from a source:
+-----------------------------------------------------------
 
-Topological sort: If I am at a vertex in the topologically sorted order, I have made sure that I have considered all the parent vertices and have calculated the shortest/greatest distance; after this it won't be visited afterwards.
+1) Do (k-curr_weight) recursive call for each adjacent vertex.
+2) If distance becomes more than k, return true, else backtrack.
+3) Keep track of visited vertices in that call stack, so that we do not loop.
+
+
+
+
+Djikstra's: In djikstra's, we add a vertex from set V to set ShortestDistance which has the shortest distance in 
+the set V currently. If suppose, we think that it could be assigned shorter distance later on, then one of the vertices
+in an alternate path to it should be present in the set V with a distance shorter than its distance (as we would add some
+edges and then reach the current shortest distance vertex), but this contradicts the first line.
+
+Topological sort: If I am at a vertex in the topologically sorted order, I have made sure that I have considered
+all the parent vertices that have edges incoming to this vertex. This means that if I have calculated the shortest/greatest distance
+to this vertex, it won't be updated later as no incoming edge to this vertex is left to be covered.
 
 
