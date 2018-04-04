@@ -1,2 +1,0 @@
-1. if in printf, %c is used and any integer is given as argument, the character corresponding to that integer is printed. Similarly, in an array index, any character is given, the ASCII value corresponding to that character is converted into integer.
-

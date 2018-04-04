@@ -19,8 +19,8 @@ public:
 
 T & T::operator = (const T &t)
 {
-   printf("operator\n");
-   return *this;
+ printf("operator\n");
+ return *this;
 }
 
 T foo(){

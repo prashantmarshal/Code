@@ -26,7 +26,6 @@ public:
 	void insert(int data){
 		if(!head) {
 			head = new node(data);
-			cout<<&head<<endl;
 		} else {
 			node *start = head;
 			while(start->next){
@@ -66,18 +65,44 @@ node* reverseinkutil(node **head, int k){
 	return p;
 }
 
+void reverseinkutil2(node **head, int k, node* tail){
+	
+	if(!*head) return;
+
+	int _k = k;
+	node* p = NULL, *c = *head, *n = (*head)->next;
+
+	while(k-- && c){
+		c->next = p;
+		p = c;
+		c = n;
+		if(n) n = n->next;
+	}
+
+	if(tail)
+		tail->next = p;
+	
+	tail = *head;
+
+	reverseinkutil2(&c, _k, tail);
+
+	*head = p;
+
+}
+
 void reverseink(node **head, int k){
 	if(!head || !(*head))
 		return;
 
 	reverseinkutil(head, k);
+	reverseinkutil2(head, k, NULL);
 }
 
 
 int main(int argc, char const *argv[])
 {
 	linkedlist l;
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 7; ++i)
 	{
 		l.insert(i+1);
 	}
