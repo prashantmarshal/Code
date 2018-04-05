@@ -28,7 +28,7 @@ topologicalSort()
     for (int i = 0; i < V; i++)
         visited[i] = false;
  
-    // For all sub-graphs
+    // For all disjoint sub-graphs
     for (int i = 0; i < V; i++)
       if (visited[i] == false)
         topologicalSortUtil(i, visited, Stack);
@@ -43,15 +43,21 @@ topologicalSort()
 
 Time: O(V+E) Space: O(V)
 
+-	Topological sort is equivalent to pre-order travsersal in trees.
+-	If a graph has Hamiltonian path, then there is a unique topological sort.
+
 
 -----------------------------------------------
 Bellman-Ford Shortest Path for Negative Weights:
 -----------------------------------------------
 
 1) List all edges.
-2) For every edge u->v, relax(v) (if d[v] > d[u]+w[u,v], then update d[v])
+2) Initialize d(source) = 0.
+3) For every edge u->v, relax(v) (if d[v] > d[u]+w[u,v], then update d[v])
+4) Do step 3) it V-1 times, where V is the number of vertices.
 
-We need to do it V-1 times, where V is the number of vertices.
+After 4), if distance of any vertex is updated (reduced), then it means that the graph has a negative
+weight cycle.
 
 --------------------
 Longest path in DAG:
@@ -68,6 +74,19 @@ Why we can't do something like Shortest path?
 - If we don't sort it, we don't know which adjacent vertex to choose first and it may lead to a situation where we use distance of a vertex v to update distances of its adjacent vertices adj[v], but after that, the distance of vertex v gets updated, so vertices from adj[v] could also get bigger distances, but we won't visit them anymore.
 
 
+Djikstra's: In djikstra's, we add a vertex from set V to the set ShortestDistance which has the shortest distance in set V 
+currently. If suppose, we think that it could be assigned a shorter distance later on, then there should be a vertex present
+in set V such that there is an edge from this_new_vertex to our_old_vertex and the distance from source to this_new_vertex should be lesser than our_old_vertex. But this contradicts the fact that our_old_vertex has the shortest distance in V currently.
+
+-	This holds only for a graph with non-negative edges.
+
+Time: O(E + VlogV)
+
+Topological sort: If I am at a vertex in a topologically sorted order, I have made sure that I have considered
+all the parent vertices that have edges incoming to this vertex. This means that if I have calculated the shortest/greatest distance
+to this vertex, it won't be updated later as no incoming edge to this vertex is left to be covered.
+
+
 -----------------------------------------------------------
 Find if there is a path of more than k length from a source:
 -----------------------------------------------------------
@@ -75,17 +94,5 @@ Find if there is a path of more than k length from a source:
 1) Do (k-curr_weight) recursive call for each adjacent vertex.
 2) If distance becomes more than k, return true, else backtrack.
 3) Keep track of visited vertices in that call stack, so that we do not loop.
-
-
-
-
-Djikstra's: In djikstra's, we add a vertex from set V to set ShortestDistance which has the shortest distance in 
-the set V currently. If suppose, we think that it could be assigned shorter distance later on, then one of the vertices
-in an alternate path to it should be present in the set V with a distance shorter than its distance (as we would add some
-edges and then reach the current shortest distance vertex), but this contradicts the first line.
-
-Topological sort: If I am at a vertex in the topologically sorted order, I have made sure that I have considered
-all the parent vertices that have edges incoming to this vertex. This means that if I have calculated the shortest/greatest distance
-to this vertex, it won't be updated later as no incoming edge to this vertex is left to be covered.
 
 

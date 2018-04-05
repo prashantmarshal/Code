@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+// you need to classify on the basis of Where is mid?
 
 int findinsortedrotatearray(int *arr, int l, int h, int element){
 	if(l > h)
