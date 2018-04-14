@@ -32,8 +32,8 @@ void optimalJobs(jobs job[], int n){
 		if(j>=0)
 			d[i] = max(d[j]+job[i].value, d[i-1]);
 		else
-			d[i] = d[i-1];
-			cout<<d[i]<<" ";
+			d[i] = max(job[i].value, d[i-1]);
+		cout<<d[i]<<" ";
 	}
 
 	cout<<endl;
