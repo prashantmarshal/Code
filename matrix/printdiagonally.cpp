@@ -9,7 +9,6 @@ void printdiagonal(int arr[5][4], int R, int C){
 
 	while(counter < R+C-1){
 		
-		
 		if(flag) {
 			r = (counter<R)?counter:R-1;
 			c = (counter<R)?0:(counter-R+1);
