@@ -4,20 +4,19 @@ class Singleton
 {
 private:
         /* Here will be the instance stored. */
-        //static 
-	Singleton* instance;
+        static Singleton* instance;
 
         /* Private constructor to prevent instancing. */
     Singleton();
 
 public:
         /* Static access method. */
-        //static 
-	Singleton* getInstance();
+        static Singleton* getInstance();
 };
 
-/* Null, because instance will be initialized on demand. */
-//Singleton* Singleton::instance = 0;
+/* Lazy instantiation:
+Null, because instance will be initialized on demand. */
+Singleton* Singleton::instance = 0;
 
 Singleton* Singleton::getInstance()
 {
