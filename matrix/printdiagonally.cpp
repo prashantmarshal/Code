@@ -5,14 +5,27 @@ using namespace std;
 void printdiagonal(int arr[5][4], int R, int C){
 
 	int r=0,c=0,counter=0;
+	bool flag = true;
 
 	while(counter < R+C-1){
-		r = (counter<R)?counter:R-1;
-		c = (counter<R)?0:(counter-R+1);
 		
-		while(r>=0 && c < C){
-			cout<<arr[r][c]<<" ";
-			r--;c++;
+		
+		if(flag) {
+			r = (counter<R)?counter:R-1;
+			c = (counter<R)?0:(counter-R+1);
+			while(r>=0 && c < C){
+				cout<<arr[r][c]<<" ";
+				r--;c++;
+			}
+			flag = false;
+		} else {
+			r = (counter<C)?0:(counter-C+1);
+			c = (counter<C)?counter:C-1;
+			while(r<R && c >= 0){
+				cout<<arr[r][c]<<" ";
+				r++;c--;
+			}
+			flag = true;
 		}
 		cout<<endl;
 		counter++;
