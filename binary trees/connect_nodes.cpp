@@ -43,6 +43,7 @@ void connectRecur(struct node* p)
     // Base case
 	if (!p)
 		return;
+	cout<<" node "<<p->data<<endl;
 
     /* Before setting nextRight of left and right children, set nextRight
     of children of other nodes at same level (because we can access 
@@ -83,6 +84,8 @@ void connectRecur2(struct node* p)
     // Base case
 	if (!p)
 		return;
+
+	cout<<"node "<<p->data<<" ";
 
     /* Set the nextRight pointer for p's left child */
 	if (p->left)
@@ -202,6 +205,7 @@ int main()
 	printf("nextRight of %d is %d \n", root->right->right->right->left->data,
 		root->right->right->right->left->nextRight? root->right->right->right->left->nextRight->data: -1);	
 
+return 0;
 	connect2(root);
 	// Let us check the values of nextRight pointers
 	printf("Following are populated nextRight pointers in the tree "

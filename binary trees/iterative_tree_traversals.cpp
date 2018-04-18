@@ -227,13 +227,13 @@ public:
 						return;
 					if(current == parent->left){
 						current = parent->right;
-						if(current)
+						if(current){
 							s.push(current);
+							break;
+						}
 					}
 					else 
 						continue;
-					if(current)
-						break;
 				}
 
 			}
