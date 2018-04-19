@@ -4,7 +4,7 @@ using namespace std;
 
 
 int func(string s, int len, int index, int n){
-	if(index == len-1){
+	if(index == len){
 		return n;
 	}
 	n *= 10;
@@ -14,9 +14,9 @@ int func(string s, int len, int index, int n){
 
 int main(int argc, char const *argv[]){
 	
-	string s = "0000";
+	string s = "00001";
 	int n = 0;
 	n = func(s, s.length(), 0, n);
-	cout<<n+1<<endl;
+	cout<<n<<endl;
 	return 0;
 }

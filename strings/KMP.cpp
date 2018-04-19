@@ -7,7 +7,7 @@ void createTemporaryArray(string pattern, int *array){
 	array[0] = 0;
 	for(;i<pattern.length();){
 		if(pattern[i] == pattern[j]){
-			array[i] = array[j]+1;
+			array[i] = j+1;
 			++i;
 			++j;
 		}else{

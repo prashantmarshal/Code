@@ -4,48 +4,50 @@ using namespace std;
 
 void reverseString(string &str, int s, int l){
 
-	int e = s+l-1;
-
-	for (int i = 0; i < l/2; ++i){
-		swap(str[s+i], str[e-i]);
+	while(s<l){
+			swap(str[s], str[l]);
+			s++;
+			l--;
 	}
 }
 
-void reverseWords(string str){
-
-	// Reverse whole string
-	reverseString(str, 0, str.length());
+void reverseWords(string &str){
 	int len = str.length();
+	reverseString(str, 0, len-1);
+	int s = 0, e = 0;
 
-	// cout<<str<<endl;
-	
-	//Reverse words
-	int ws = -1, we = -1;
+	while(s < len && e < len){
 
-	for (int i = 0; i < len; ++i){
-		if(str[i] == ' ' && ws == -1)
-			continue;
-		else if(str[i] == ' '){
-			we = i-1;
-			reverseString(str, ws, we-ws+1);
-			ws = we = -1;
-		}else if(ws == -1){
-			ws = i;
-		}else if(i == len-1 && ws != -1){
-			we = i;
-			reverseString(str, ws, we-ws+1);
+		// search for s
+		while(s < len && str[s] == '.'){
+			s++;
 		}
+
+		if(s == len)
+			break;
+
+		e = s;
+
+		while(e < len && str[e] != '.')
+			e++;
+		reverseString(str, s, e-1);
+		s = e;
+
 	}
 
-	cout<<str<<endl;
+	cout<<"["<<str<<"]"<<endl;
 
 }
 
 int main(){
-	string str = "hello     i am prashant	";
+	string str = "hello......i..am..prashant....";
+
+	cout<<"["<<str<<"]"<<endl;
+
 	/*while(1){
 		getline(cin, str);
 		reverseWords(str);
 	}*/
+	reverseWords(str);
 	reverseWords(str);
 }

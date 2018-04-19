@@ -10,9 +10,14 @@ public:
 	dll_node *prev;
 	int data;
 
-	dll_node(){
+	dll_node(int data = -1){
 		next = prev = NULL;
-		data = -1;
+		this->data = data;
+	}
+
+	~dll_node(){
+		next = NULL;
+		prev = NULL;
 	}
 };
 
@@ -27,15 +32,13 @@ public:
 	void insert	(int data){
 
 		if(head == NULL){
-			head = new dll_node();
-			head->data = data;
+			head = new dll_node(data);
 		}else{
 			dll_node *start = head;
 			while(start->next)
 				start = start->next;
 			
-			start->next = new dll_node();
-			start->next->data = data;
+			start->next = new dll_node(data);
 			start->next->prev = start;
 		}
 	}
@@ -56,23 +59,21 @@ public:
 		else if(start == head){
 			head = start->next;
 			if(head) head->prev = NULL;
+			/*
+			start->next = NULL;
+			*/
 			delete(start);
 		}else{
 			start->prev->next = start->next;
 			if(start->next)
 				start->next->prev = start->prev;
+			/*
+			start->next = NULL;
+			start->prev = NULL;
+			*/
 			delete start;
 		}
 
-	}
-
-	void delete_node_all (int data){
-		dll_node *start = head;
-		while(start){
-			if(start->data == data)
-				delete_node(data);
-			start = start->next;
-		}
 	}
 
 	void print_dll(){

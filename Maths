@@ -1,0 +1,6 @@
+1. Area of triangle:
+[ x1(y2 – y3) + x2(y3 – y1) + x3(y1-y2)]/2
+
+Q. Find if a point lies inside the rectangle:
+
+Ans. Create four triangles and calculate their area. If area 4(triangles) == area rectangle, then true.
