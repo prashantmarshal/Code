@@ -1,0 +1,37 @@
+https://www.geeksforgeeks.org/maximum-and-minimum-in-an-array/
+->taking two at a time 3n/2 comparisons
+
+https://www.geeksforgeeks.org/search-element-unsorted-array-using-minimum-number-comparisons/
+->arr[n-1] = x;
+while(arr[i] != arr[x])
+
+Minimum number of increment-other operations to make all array elements equal.
+-> We think of the problem as whenever all the elements are incremented other than the highest element,
+in a way, the highest (and only the highest) element is decremented. Like this, we have to decrement all
+the elements who are greater than least_element.
+
+operations = Sum of all elements - n*least_element.
+
+
+Given n points in a plane which form a polygon. Find if a random point exists inside that polygon or not?
+1. Area of triangle:
+[ x1(y2 – y3) + x2(y3 – y1) + x3(y1-y2)]/2
+
+Q. Find if a point lies inside the rectangle:
+Ans. Create four triangles and calculate their area. If area 4(triangles) == area rectangle, then true.
+
+When you have to find a triplet, sort the array, fix one element and then do linear search for remaining two.
+
+
+Some tricks like saving cumulative minimum or maximum until index i.
+like left[n] stores minimum from 0 to nth index. then moving ahead left[n+1] = min(arr[n+1], left[n])
+
+
+Find the smallest positive integer
+Hash only positive elements (< n size of array) with their own values at their indexes. Then the index which
+doesn't have its own value is the smallest positive number in the array.
+
+
+When we have to reverse an array, we can swap from leftmost and rightmost and proceed rightwards and leftwards resp.
+
+Whenever we are given array elements 1 to n, always think of self-indexing.

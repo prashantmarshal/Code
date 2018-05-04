@@ -35,7 +35,6 @@ void DFS(char mat[][COL], char *word, int index, int x, int y, vector<pair<int,i
 		int a = x+arr[i][0],b = y+arr[i][1];
 
 		if(issafe(a,b) && mat[a][b] == word[index]){
-			// cout<<a<<" "<<b<<" "<<mat[a][b]<<endl;
 			pos.push_back(make_pair(a,b));
 			DFS(mat, word, index+1, a, b, pos, len);
 			pos.pop_back();
@@ -61,12 +60,12 @@ void findWords(char mat[][COL], char *word, int len){
 }
 
 int main(){
-    char mat[ROW][COL]= { {'B', 'S', 'E', 'Y', 'S'},
+    char mat[ROW][COL]= { {'B', 'S', 'E', 'N', 'S'},
                           {'H', 'E', 'D', 'E', 'S'},
                           {'S', 'G', 'N', 'D', 'E'}
                         };
  
-    char word[] ="DES";
+    char word[] ="DEN";
  
     findWords(mat, word, strlen(word) - 1);
     cout<<cnt<<endl;
