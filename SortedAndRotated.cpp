@@ -3,7 +3,7 @@ using namespace std;
 
 // you need to classify on the basis of Where is mid?
 
-int findinsortedrotatearray(int *arr, int l, int h, int element){
+int findRotated(int *arr, int l, int h, int element){
 	if(l > h)
 		return -1;
 
@@ -15,21 +15,21 @@ int findinsortedrotatearray(int *arr, int l, int h, int element){
 	else if(arr[h] < arr[mid]){
 
 		if(element > arr[mid])
-			return findinsortedrotatearray(arr, mid+1, h, element);
+			return findRotated(arr, mid+1, h, element);
 		else {
 			if(element < arr[l])
-				return findinsortedrotatearray(arr, mid+1, h, element);
-			return findinsortedrotatearray(arr, l, mid-1, element);
+				return findRotated(arr, mid+1, h, element);
+			return findRotated(arr, l, mid-1, element);
 		}
 	
 	}else if(arr[h] > arr[mid]){
 	
 		if(element < arr[mid])
-			return findinsortedrotatearray(arr, l, mid-1, element);
+			return findRotated(arr, l, mid-1, element);
 		else {
 			if(element > arr[h])
-				return findinsortedrotatearray(arr, l, mid-1, element);
-			return findinsortedrotatearray(arr, mid+1, h, element);
+				return findRotated(arr, l, mid-1, element);
+			return findRotated(arr, mid+1, h, element);
 		}
 	}
 
@@ -51,7 +51,7 @@ int main(int argc, char const *argv[])
 		}
 		int elem;
 		cin>>elem;
-		cout<<findinsortedrotatearray(arr, 0, size-1, elem)<<endl;
+		cout<<findRotated(arr, 0, size-1, elem)<<endl;
 	}
 	return 0;
 }

@@ -1,0 +1,7 @@
+https://leetcode.com/problems/non-overlapping-intervals/discuss/91713/Java:-Least-is-Most
+
+https://www.geeksforgeeks.org/given-n-appointments-find-conflicting-appointments/
+
+https://www.geeksforgeeks.org/find-a-pair-with-given-sum-in-bst/
+
+https://www.geeksforgeeks.org/check-for-majority-element-in-a-sorted-array/

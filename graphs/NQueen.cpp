@@ -3,7 +3,7 @@ using namespace std;
 
 int n;
 
-bool issafe(int **arr, int row, int col){
+bool isSafe(int **arr, int row, int col){
 
 	/*check in left row*/
 	for(int i=0;i<col;++i)
@@ -35,7 +35,7 @@ bool nqueen(int **arr, int col, int n){
 		return true;
 	for (int i = 0; i < n; ++i){
 
-		if(issafe(arr, i, col)){
+		if(isSafe(arr, i, col)){
 			arr[i][col] = 1;
 			if(nqueen(arr, col+1, n))
 				return true;

@@ -35,3 +35,9 @@ doesn't have its own value is the smallest positive number in the array.
 When we have to reverse an array, we can swap from leftmost and rightmost and proceed rightwards and leftwards resp.
 
 Whenever we are given array elements 1 to n, always think of self-indexing.
+
+Sort according to another array.
+1. Loop through A1[], store the count of every number in a HashMap (key: number, value: count of number) .
+2. Loop through A2[], check if it is present in HashMap, if so, put in output array that many times and remove the number from HashMap.
+3. Sort the rest of the numbers present in HashMap and put in output array.
+
