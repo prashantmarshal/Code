@@ -12,8 +12,6 @@ int maxproduct(int arr[], int n){
 	else
 		cn = arr[0];
 
-	// cout<<"0"<<" cp cn p "<<cp<<" "<<cn<<" "<<p<<endl;
-	
 	for (int i = 1; i < n; ++i)
 	{
 		if(arr[i] > 0){
@@ -28,8 +26,7 @@ int maxproduct(int arr[], int n){
 			cp = cn = 0;
 		}
 		p = max(cp, p);
-		
-		// cout<<i<<" cp cn p "<<cp<<" "<<cn<<" "<<p<<endl;
+	
 	}
 
 	return p;

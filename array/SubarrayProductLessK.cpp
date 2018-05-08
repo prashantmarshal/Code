@@ -29,9 +29,9 @@ void findNumberOfSubarraysProductLessThanK(int arr[], int size, int k){
 
 int main(int argc, char const *argv[])
 {
-	int arr[] = {1,2,2,2,4,4,3,4,3,4,34,2,342,34,34,5};
+	int arr[] = {2, 1, 5};
 	int size = sizeof(arr)/sizeof(arr[0]);
-	int k = 100;
+	int k = 3;
 
 	findNumberOfSubarraysProductLessThanK(arr, size, k);
 	return 0;
