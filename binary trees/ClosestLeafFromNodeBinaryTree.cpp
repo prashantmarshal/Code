@@ -28,7 +28,7 @@ int closestDown(struct Node *root){
 }
 
 int findClosestUtil(struct Node *root, char k, struct Node *ancestors[],
-	int index){
+		int index){
 	if (root == NULL)
 		return INT_MAX_2;
 
@@ -42,17 +42,17 @@ int findClosestUtil(struct Node *root, char k, struct Node *ancestors[],
 
 	ancestors[index] = root;
 	return getMin(findClosestUtil(root->left, k, ancestors, index+1),
-		findClosestUtil(root->right, k, ancestors, index+1));
+			findClosestUtil(root->right, k, ancestors, index+1));
 
 }
 
 int findClosest(struct Node *root, char k){
 	struct Node *ancestors[100];
 	const clock_t begin_time = clock();
-	
+
 	for (int i = 0; i < 10000000; ++i)
 
-	return findClosestUtil(root, k, ancestors, 0);
+		return findClosestUtil(root, k, ancestors, 0);
 	std::cout << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
 }
@@ -78,7 +78,7 @@ Node* findNode(Node* root, char k, vector<Node*> &v){
 		v.push_back(root);
 		return right;
 	}
-	
+
 	return NULL;
 }
 
@@ -123,7 +123,7 @@ int _findClosest(Node *root, char k){
 
 	for (int i = 0; i < 10000000; ++i)
 
-	// find in left and right subtree of node
+		// find in left and right subtree of node
 		if(node && (node->left || node->right)){
 			distance = min(distance, min(findClosestDown(node->left), findClosestDown(node->right)));
 			distance = min(distance, searchinancestors(ancestors, 1));
@@ -131,41 +131,41 @@ int _findClosest(Node *root, char k){
 			return 0;
 		}
 
-		std::cout << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
+	std::cout << float( clock () - begin_time ) /  CLOCKS_PER_SEC;
 
-		return distance;
+	return distance;
+}
+
+
+
+int main(){
+	struct Node *root	 = newNode('A');
+	root->left			 = newNode('B');
+	root->right			 = newNode('C');
+	root->right->left	 = newNode('E');
+	root->right->right	 = newNode('F');
+	root->right->left->left = newNode('G');
+	root->right->left->left->left = newNode('I');
+	root->right->left->left->right = newNode('J');
+	root->right->right->right	 = newNode('H');
+	root->right->right->right->left = newNode('K');
+
+
+	for (int i = 0; i < 1; ++i)
+	{
+		char k = 'H';
+		cout << "Distace of the closest key from " << k << " is "
+			<< _findClosest(root, k) << endl;
+		k = 'C';
+		cout << "Distace of the closest key from " << k << " is "
+			<< _findClosest(root, k) << endl;
+		k = 'E';
+		cout << "Distace of the closest key from " << k << " is "
+			<< _findClosest(root, k) << endl;
+		k = 'B';
+		cout << "Distace of the closest key from " << k << " is "
+			<< _findClosest(root, k) << endl;
+
 	}
-
-
-
-	int main(){
-		struct Node *root	 = newNode('A');
-		root->left			 = newNode('B');
-		root->right			 = newNode('C');
-		root->right->left	 = newNode('E');
-		root->right->right	 = newNode('F');
-		root->right->left->left = newNode('G');
-		root->right->left->left->left = newNode('I');
-		root->right->left->left->right = newNode('J');
-		root->right->right->right	 = newNode('H');
-		root->right->right->right->left = newNode('K');
-
-
-		for (int i = 0; i < 1; ++i)
-		{
-			char k = 'H';
-			cout << "Distace of the closest key from " << k << " is "
-			<< _findClosest(root, k) << endl;
-			k = 'C';
-			cout << "Distace of the closest key from " << k << " is "
-			<< _findClosest(root, k) << endl;
-			k = 'E';
-			cout << "Distace of the closest key from " << k << " is "
-			<< _findClosest(root, k) << endl;
-			k = 'B';
-			cout << "Distace of the closest key from " << k << " is "
-			<< _findClosest(root, k) << endl;
-
-		}
-		return 0;
-	}
+	return 0;
+}

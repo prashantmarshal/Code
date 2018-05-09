@@ -2,7 +2,7 @@
 
 using namespace std;
 
-
+// kadane product
 int maxproduct(int arr[], int n){
 	int p=0,cp=0,cn=0,temp;
 

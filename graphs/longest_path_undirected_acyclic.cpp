@@ -7,7 +7,6 @@ void DFS(std::vector< pair<int, int> >graph[], int src, std::vector<bool> &visit
 	int curr_len, int *length){
 
 	visited[src] = 1;
-	cout<<"src "<<src<<endl;
 
 	/* how many vertices are connected to this vertex via edges */
 	int size2 = graph[src].size();
@@ -21,7 +20,6 @@ void DFS(std::vector< pair<int, int> >graph[], int src, std::vector<bool> &visit
 		if(!visited[set.first]){
 
 			curr_len += set.second;
-			cout<<"curr_len "<<curr_len<<endl;
 			DFS(graph, set.first, visited, curr_len, length);
 
 			if(curr_len > *length){
