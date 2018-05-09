@@ -85,7 +85,7 @@ int main(int argc, char const *argv[]){
 
 	int arr[100];
 	for (int i = 0; i < 100; ++i){
-		arr[i] = rand()%100;
+		arr[i] = i+1;
 	}
 	int size = sizeof(arr)/sizeof(arr[0]);
 	for (int i = 0; i < size; ++i){
