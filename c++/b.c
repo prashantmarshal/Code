@@ -1,5 +1,12 @@
 #include <stdio.h>
 
-const int a = 5;
+
+
+extern const int glob;
+
+void f() {
+
+	printf("%d\n", glob);
+}
 
 

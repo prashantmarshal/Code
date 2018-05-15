@@ -1,0 +1,30 @@
+Cooperative multitasking
+Preemptive multitasking
+
+Preemption: the act of involuntarily suspending a running process.
+Timeslice of a process: the time the process runs before it is preempted is usually predetermined.
+
+Linux's unique "fair" scheduler does not employ timeslices.
+
+Policy
+Policy is the behavior of the scheduler that determines what runs when.
+
+I/O-Bound Versus Processor-Bound Processes
+Processes can be classified as either I/O-bound or processor-bound.
+
+An I/O-bound process spends much of its time submitting and waiting on I/O requests. Such a process is runnable for only short durations, because it eventually blocks waiting on more I/O.
+"I/O" means any type of blockable resource, such as keyboard input or network I/O, and not just disk I/O. Most graphical user interface (GUI) applications are I/O-bound, even if they never read from or write to the disk, because they spend most of their time waiting on user interaction via the keyboard and mouse.
+Processor-bound processes spend much of their time executing code. Thet tend to run until they are preempted because they do not block on I/O requests very often. A scheduler policy for processor-bound processes tends to run such processes less frequently but for longer durations.
+Examples of processor-bound processes include: a program executing an infinite loop, ssh-keygen, MATLAB.
+
+I/O-bound processes do not need longer timeslices (although they do like to run often)
+Processor-bound processes crave long timeslices (to keep their caches hot).
+
+Favoring I/O-bound over processor-bound
+Linux, aiming to provide good interactive response and desktop performance, optimizes for process response (low latency), thus favoring I/O-bound processes over processor-bound processes. This is done in a creative manner that does not neglect processor-bound processes.
+
+Timeslice on Linux
+Linux's CFS scheduler does not directly assign timeslices to processes, but assigns processes a proportion of the processor. The amount of processor time that a process receives is a function of the load of the system.
+
+
+

@@ -1,7 +1,11 @@
 #include <stdio.h>
 
-extern const int a;
+#include "b.c"
 
-int main(){
-	printf("%d\n", a);
-}
+const int glob = 10;  
+  
+int main() {  
+   f();  
+}  
+
+

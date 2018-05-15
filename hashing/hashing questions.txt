@@ -14,3 +14,26 @@ Group all occurrences of characters according to first appearance
 
 
 https://www.geeksforgeeks.org/dynamic-programming-set-11-egg-dropping-puzzle/
+
+
+
+Hashing
+
+Given an array, find subarray with equal 0s and 1s.
+-> Create hash table of differences, see previous if current difference occurred previously or not.
+
+Heap
+
+1. Find smallest range containing elements from k lists
+-> Taking heap of k size and proceeding like merging k-sorted arrays.
+https://www.geeksforgeeks.org/find-smallest-range-containing-elements-from-k-lists/
+
+
+https://www.geeksforgeeks.org/sort-numbers-stored-on-different-machines/
+https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array-set-2-expected-linear-time/
+https://www.geeksforgeeks.org/merge-sort-tree-for-range-order-statistics/
+https://www.geeksforgeeks.org/fibonacci-heap-set-1-introduction/
+https://www.geeksforgeeks.org/subarrays-distinct-elements/
+
+https://www.youtube.com/watch?v=-WV9vWjhI3g&list=PLE28375D4AC946CC3&index=20
+https://www.youtube.com/watch?v=YeI6V2O5BFE

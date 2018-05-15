@@ -1,5 +1,12 @@
 #include <stdio.h>
+#include<iostream>
+using namespace std;
 
-const int a = 5;
+
+const int glob = 10;  
+
+void f() {
+	cout<<glob<<endl;
+}
 
 
