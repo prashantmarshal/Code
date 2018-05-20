@@ -14,7 +14,9 @@ void util(string str, char data[], int ap, int dp, int al, int dl){
 
 	for(int i = ap; i < al; ++i){
 		data[dp] = str[i];
-		util(str, data, i+1, dp+1, al, dl);
+		swap(str[i], str[ap]);
+		util(str, data, ap+1, dp+1, al, dl);
+		swap(str[i], str[ap]);
 		
 		/* this is for handling duplicates
 		if there were no duplicates we need not sort the string */

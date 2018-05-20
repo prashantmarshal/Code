@@ -4,12 +4,16 @@ using namespace std;
 
 void permuteUtil(string s, int start, int len){
 
+	for(int i=0;i<start;++i){
+		cout<<s[i];
+	}
+	cout<<endl;
 	if(start == len){
-		cout<<s<<endl;
+		//cout<<s<<endl;
 		return;
 	}
 
-	for(int i=start; i<=len; ++i){
+	for(int i=start; i<len; ++i){
 		swap(s[start], s[i]);
 		permuteUtil(s, start+1, len);
 		swap(s[i], s[start]);
@@ -19,7 +23,7 @@ void permuteUtil(string s, int start, int len){
 
 void permute(string s){
 	int len = s.length();
-	permuteUtil(s, 0, len-1);
+	permuteUtil(s, 0, len);
 
 }
 

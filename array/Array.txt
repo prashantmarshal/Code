@@ -41,3 +41,10 @@ Sort according to another array.
 2. Loop through A2[], check if it is present in HashMap, if so, put in output array that many times and remove the number from HashMap.
 3. Sort the rest of the numbers present in HashMap and put in output array.
 
+Shuffling an array.
+->srand(time(NULL)*getpid()) in main()
+then rand() % sizeof array remaining.
+if we don't change the seed value, the random numbers will generated same.
+
+
+
