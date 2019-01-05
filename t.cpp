@@ -1,31 +1,22 @@
-#include <stdio.h>
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-
-#include <string.h>
-
-/*void foo (char *bar)
-{
-   char  c[12];
-
-   strcpy(c, bar);  // no bounds checking
+class Base {
+//public:
+    int x;
+	~Base(){
+cout<<"ok\n";
 }
-
-int main (int argc, char **argv)
-{
-   foo(argv[1]);
-
-   return 0;
-}*/
-
-class T{
-	void f(){
-		int a;
-	}
 };
-
-int main(){
-	cout<<sizeof(T);
+ 
+ 
+int main()
+{
+char *ptr = "prashant";
+ptr[2] = 'k';
+cout<<ptr<<endl;
+cout<<sizeof(string)<<endl;
+static Base *d = new Base;
+ return 0;
 }
+

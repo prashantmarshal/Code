@@ -29,7 +29,7 @@ void permute(string s){
 
 int main(int argc, char const *argv[])
 {
-	string s = "abc";
+	string s = "456";
 	permute(s);
 	return 0;
 }

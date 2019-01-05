@@ -30,7 +30,6 @@ void maximumSumSubMatrix(int rows, int cols){
 				temp = max(temp + newsum, newsum);
 
 				if(total < temp){
-					//updated position
 					total = temp;
 				}
 			}

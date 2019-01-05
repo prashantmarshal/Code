@@ -2,28 +2,43 @@
 
 using namespace std;
 
+struct test
+{
+unsigned int x; 
+long int y: 31;
+unsigned int z;
+};
+
 struct s
 {
-	int z:32;
-	long int i: 33;
-	long int: 0;
-	int a:1;
+int *z;
+int x;
 };
+
+class A {
+public:
+	int a;
+
+	A(){
+		a = 5;
+	}
+};
+
+class B: public A
+{
+public:
+	int a;
+	B(){
+		a = 10;
+	}
+	
+};
+
 
 int main(int argc, char const *argv[])
 {
-
-	/*int arr[2] = {0, 1};
-	s o;
-	int *ptr1 = &o.b;
-	int *ptr2 = &o.a;
-	int k = (unsigned long)ptr2 - (unsigned long)ptr1;//<<endl;
-	if(ptr1 + 1 == ptr2)
-		cout<<"ok\n";*/
-	// cout<<k<<endl;
-	// cout<<(unsigned long)arr<<" "<<(unsigned long)&arr[0]<<" "<<(unsigned long)&arr[1]<<" " <<(unsigned long)&arr[1] - (unsigned long)arr<<endl;
-/*	int x = 0x80000000;
-	cout<<x<<endl;
-*/	cout<<sizeof(s)<<endl;
-	return 0;
+	A *obj = new B();
+	cout<<obj->a;
+// D().f2();
+return 0;
 }

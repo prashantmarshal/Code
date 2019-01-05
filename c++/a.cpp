@@ -1,57 +1,41 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-
-class base
+class B
 {
 public:
-   	void print ()
-    { cout<< "print base class" <<endl; }
- 
-    void show ()
-    { cout<< "show base class" <<endl; }
+     void func(){
 
-    virtual ~base(){
-    	cout<<"base destructor\n";
+    }
+    void f2(){
+        cout<<"base\n";
     }
 };
- 
-class derived:public base
+
+
+class D
 {
 public:
-	static int a;
+    void func(){
 
-    void print ()
-    { cout<< "print derived class" <<endl; }
- 
-    void show ()
-    { cout<< "show derived class" <<endl; }
-
-    ~derived(){
-    	cout<<"derived destructor\n";
     }
 
+    void f2(){
+        cout<<"derived\n";
+    }
 };
 
-int f(int a){
-
-}
-
-int f(int& a){
-
-}
- 
-int main()
+struct s
 {
-	int g=2;
-	f(g);
-    derived *bptr = new derived();
-    // derived d;
-    // bptr = &d;
-     
-    //virtual function, binded at runtime
-    bptr->print(); 
-    delete bptr;
-    // base &a = d;
-    // a.print();
+    int x: 30;
+    long int y: 1;
+};
+
+int main(int argc, char const *argv[])
+{
+    cout<<sizeof(s);
+    // D* d = new D;
+    // B* b = new B;
+    // d = reinterpret_cast<D*>(b);
+    return 0;
 }

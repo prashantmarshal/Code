@@ -46,5 +46,20 @@ Shuffling an array.
 then rand() % sizeof array remaining.
 if we don't change the seed value, the random numbers will generated same.
 
+Count all distinct pairs with difference equal to k
+-> Use Sorting
+Sort the array arr
+Take two pointers, l and r, both pointing to 1st element
+Take the difference arr[r] – arr[l]
+If value diff is K, increment count and move both pointers to next element
+if value diff > k, move l to next element
+if value diff < k, move r to next element
+return count
 
+Rotate array
+-> GCD times (gcd)
+for i=0:gcd
+	rotate k distance
 
+reverse 0:k k+1:n-1
+reverse 0:n-1

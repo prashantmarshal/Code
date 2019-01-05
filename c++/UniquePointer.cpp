@@ -37,8 +37,10 @@ class SmartPtr
 		return *ptr;
 	}
 
+	// for unique_ptr, set this->ptr to NULL
 	SmartPtr& operator= (SmartPtr & obj){
 
+		// 1. in case a pointer is leaving its own reference
 		if(this->ptr){
 			(*count)--;
 			cout<<"Decremented reference: "<<*count<<endl;
@@ -51,6 +53,7 @@ class SmartPtr
 			else
 				cout<<"Pointer deleted\n";
 		}
+		// 2. when some newly created pointer is being pointed to obj
 		ptr = obj.ptr;
 		count = obj.count;
 		(*count)++;
