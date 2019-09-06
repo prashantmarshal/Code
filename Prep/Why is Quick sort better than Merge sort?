@@ -1,0 +1,3 @@
+Why is Quick sort better than Merge sort?
+
+Tail recursive, In place, Locality of reference, Randomized.

@@ -1,0 +1,13 @@
+Why is Quick sort better than Merge sort?
+
+Tail recursive, In place, Locality of reference, Randomized.
+
+
+For merge sort?
+No access to pivot element.
+It can be done without extra space in Linked lists.
+
+
+
+
+invert bst
