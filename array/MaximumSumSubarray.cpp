@@ -8,6 +8,7 @@ int arr[10000];
 int maxSubarray(int n){
 	if(n==0) return 0;
 
+	// curr = 0 would be incorrect if all elements are negative
 	int curr = arr[0];
 	int total = arr[0];
 
@@ -18,7 +19,6 @@ int maxSubarray(int n){
 	}
 
 	return total;
-
 }
 
 

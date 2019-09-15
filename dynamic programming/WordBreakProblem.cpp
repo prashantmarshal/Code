@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include <string.h>
+#include <unordered_set>
 
 using namespace std;
 
@@ -52,9 +53,42 @@ bool wordbreak2(string s, int l, int r){
 	return false;
 }
 
+bool isPresent(unordered_set<string> dict, string s, int i, int j) {
+	return dict.find(s.substr(i, j)) != dict.end();
+}
+
+bool wordBreak(string s, vector<string>& wordDict) {
+    int n = wordDict.size();
+	unordered_set<string> dict;
+
+	for (int i = 0; i < n; i++){
+		dict.insert(wordDict[i]);
+	}
+
+	int size = s.size();
+	vector<bool>words(size+1, false);
+	words[0] = true;
+
+	for (int i = 1; i <= size; i++)
+	{
+		bool found = isPresent(dict, s, 0, i);
+		if(found) {
+			words[i] = true;
+		} else {
+			for (int j = 1; j < i; j++) {
+				if (words[j] && isPresent(dict, s, j, i-j)) {
+					words[i] = true;
+					break;
+				}
+			}
+		}
+	}
+
+	return words[size];	
+}
+
 int main(int argc, char const *argv[])
 {
-
 
 	string s;
 	while(1){

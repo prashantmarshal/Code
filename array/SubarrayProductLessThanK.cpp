@@ -1,9 +1,11 @@
+// https://leetcode.com/problems/subarray-product-less-than-k/
+
 #include <iostream>
 using namespace std;
 
 
-void findNumberOfSubarraysProductLessThanK(int arr[], int size, int k){
-	int i = 0, j = 0, cnt = 0;
+void subarraysProductLessThanK(int arr[], int size, int k){
+	int i = 0, j = 0, cnt = 0; // righ end, left end and count
 	int product = 1;
 
 	while(i < size){
@@ -15,6 +17,7 @@ void findNumberOfSubarraysProductLessThanK(int arr[], int size, int k){
 			++j;
 		}
 
+		// adding count of subarrays ending at i and starting at j
 		if(product < k){
 			cnt += i-j+1;
 		}
@@ -22,8 +25,7 @@ void findNumberOfSubarraysProductLessThanK(int arr[], int size, int k){
 		++i;
 	}
 
-	cout<<cnt<<endl;
-
+	printf("%d\n", cnt);
 }
 
 
@@ -33,6 +35,6 @@ int main(int argc, char const *argv[])
 	int size = sizeof(arr)/sizeof(arr[0]);
 	int k = 3;
 
-	findNumberOfSubarraysProductLessThanK(arr, size, k);
+	subarraysProductLessThanK(arr, size, k);
 	return 0;
 }

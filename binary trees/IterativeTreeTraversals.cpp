@@ -1,6 +1,4 @@
-#include <iostream>
-#include <stack>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 class node {
@@ -9,16 +7,10 @@ public:
 	node* left;
 	node* right;
 
-	node(){
-		data = 0;
-		left = right = NULL;
-	}
-
-	node(int data){
+	node(int data = 0){
 		this->data = data;
 		left = right = NULL;
 	}
-
 };
 
 class bst {
@@ -64,6 +56,7 @@ public:
 	void postorder(){
 		postorder_util(root);
 	}
+
 	node* insert_util(node* root, int data){
 		if(!root)
 			return new node(data);
@@ -133,106 +126,57 @@ public:
 		return find_util(root, data);
 	}
 
-	void inorder_iterative(node* root)
+	void inorder_iterative()
 	{
-		node *current = root;
-		stack<node*> s;
-		bool flag = true;
+		vector<int> bst;
+        stack<node*> stk;
+        node* curr;
+        
+        if (!root)
+            return;
+        
+        curr = root;
 
-		s.push(current);
+		// construct bst in vector by in-order traversal
+        while (curr || !stk.empty()) {
+            while (curr) {
+                stk.push(curr);
+                curr = curr->left;
+            }
 
-		while (!s.empty())
-		{
-			if(flag){
-				while(current->left){
-					s.push(current->left);
-					current = current->left;
-				}
-			}
-
-			current = s.top();
-			s.pop();
-			printf("%d ", current->data);
-
-			if(current->right){
-				s.push(current->right);
-				current = current->right;
-				flag = true;
-			}else{
-				flag = false;
-			}
-		}
-	}
-
-	void inOrder(struct tNode *root)
-	{
-	    /* set current to root of binary tree */
-	    struct tNode *current = root;
-	    struct sNode *s = NULL;  /* Initialize stack s */
-	    bool done = 0;
-
-	    while (!done)
-	    {
-		/* Reach the left most tNode of the current tNode */
-		if(current !=  NULL)
-		{
-		    /* place pointer to a tree node on the stack before traversing 
-		       the node's left subtree */
-		    push(&s, current);                                               
-		    current = current->left;  
-		}
-
-		/* backtrack from the empty subtree and visit the tNode 
-		   at the top of the stack; however, if the stack is empty,
-		   you are done */
-		else                                                             
-		{
-		    if (!isEmpty(s))
-		    {
-			current = pop(&s);
-			printf("%d ", current->data);
-
-			/* we have visited the node and its left subtree.
-			   Now, it's right subtree's turn */
-			current = current->right;
-		    }
-		    else
-			done = 1; 
-		}
-	    } /* end of while */ 
+            curr = stk.top();
+            stk.pop();
+            
+            cout<<curr->data<<" ";
+            curr = curr->right;
+        }
+        return;
 	}
 
 	void preorder_iterative(node* root)
 	{
-		node *current = root;
-		stack<node*> s;
-		bool flag = true;
+        stack<node*> stk;
+        node* curr;
+        
+        if (!root)
+            return;
+        
+        curr = root;
 
-		printf("%d ", current->data);
-		s.push(current);
+		// construct bst in vector by in-order traversal
+        while (curr || !stk.empty()) {
+            while (curr) {
+                cout<<curr->data<<" ";
+                stk.push(curr);
+                curr = curr->left;
+            }
 
-		while (!s.empty())
-		{
-			if(flag){
-				while(current->left){
-					printf("%d ", current->left->data);
-					s.push(current->left);
-					current = current->left;
-				}
-			}
-
-			current = s.top();
-			s.pop();
-			
-			if(current->right){
-				printf("%d ", current->right->data);
-				s.push(current->right);
-				current = current->right;
-				flag = true;
-			}else{
-				flag = false;
-			}
-		}
+            curr = stk.top();
+            stk.pop();
+            
+            curr = curr->right;
+        }
+        return;
 	}
 
 	void postorder_iterative(node *root){
@@ -280,6 +224,7 @@ public:
 
 
 	int sumofleftleaves(node* root);
+	int sumofleftleavesagain(node* root);
 
 	int diameter_2(node* root){
 		if(!root)
@@ -359,22 +304,50 @@ int bst::sumofleftleaves(node* root){
 	return sumofleftleaves(root->left)+sumofleftleaves(root->right);
 }
 
+bool isleaf(node *n){
+	if(!n)
+		return false;
+
+	if(n->left == NULL && n->right== NULL){
+		return true;
+	}
+	return false;
+}
+
+int bst::sumofleftleavesagain(node *root){
+	if (!root)
+		return 0;
+
+	if(isleaf(root->left)){
+		return root->left->data;
+	}	
+
+	return sumofleftleavesagain(root->left) + sumofleftleavesagain(root->right);
+}
 
 int main(int argc, char const *argv[])
 {
 	bst *tree =  new bst();
 	int data;
 
-	for (int i = 0; i < 10; ++i){
+	for (int i = 0; i < 9; ++i){
 		data = rand()%100*5/2*8/3;
 		cout<<data<<" ";
 		tree->insert(data);
 	}
 	cout<<endl;
-	node* t = tree->lca(tree->root, 480, 520);
-	if(t!=NULL)cout<<t->data<<endl;else printf("t NULL\n");
-	delete(tree);
+	// node* t = tree->lca(tree->root, 480, 520);
+	// if(t!=NULL)cout<<t->data<<endl;else printf("t NULL\n");
+	// delete(tree);
+	// cout<<endl;
+
+	/* tree->inorder();
 	cout<<endl;
+	tree->inorder_iterative();
+	*/
+
+	cout<<tree->sumofleftleaves(tree->root)<<endl;
+	cout<<tree->sumofleftleavesagain(tree->root);
 
 	return 0;
 }

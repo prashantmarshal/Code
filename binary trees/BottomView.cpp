@@ -23,13 +23,14 @@ void bottomView(node *root) {
 		return;
 
 	queue<node*> q;
+
 	map<int, int> hash;
 
 	root->hd = 0;
 	q.push(root);
 
 	while(!q.empty()){
-
+ 
 		node* front =  q.front();
 
 		hash[front->hd] = front->data;
@@ -52,11 +53,6 @@ void bottomView(node *root) {
 	}
 
 }
-
-
-
-
-
 
 int main()
 {
