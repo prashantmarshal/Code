@@ -1,6 +1,4 @@
-#include <iostream>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 struct jobs
@@ -35,12 +33,9 @@ void optimalJobs(jobs job[], int n){
 			d[i] = max(job[i].value, d[i-1]);
 		cout<<d[i]<<" ";
 	}
+	
 	cout<<endl;
-	for(int i = n-1; i>=0; --i){
-		cout<<d[i]<<" ";
-	}
-	cout<<endl;
-
+	
 	for(int i = n-1; i>=0;){
 		if(d[i] == d[i-1]){
 			--i;

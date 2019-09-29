@@ -1,19 +1,22 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-void util(string str, char data[], int ap, int dp, int al, int dl){
 
-	for (int i = 0; i < dp; ++i)
+// Idea is to take an auxiliary buffer data[]
+// Put one by one each element arr[i] at a position x in data, and recurs for rest of the elements (i to n-1 with x and beyond space)
+// curr for data and index for str 
+void util(string str, char data[], int curr, int index, int len){
+
+	for (int i = 0; i < curr; ++i)
 		cout<<data[i];
 	cout<<endl;
 
-	if(dp >= dl)
+	if(index >= len)
 		return;
 
-	for(int i = ap; i < al; ++i){
-		data[dp] = str[i];
-		util(str, data, i+1, dp+1, al, dl);
+	for(int i = curr; i < len; ++i){
+		data[curr] = str[i];
+		util(str, data, curr+1, i+1, len);
 		
 		/* this is for handling duplicates
 		if there were no duplicates we need not sort the string */
@@ -22,17 +25,18 @@ void util(string str, char data[], int ap, int dp, int al, int dl){
 	}
 }
 
-void allcombinations(string str, int r){
-	char data[r];
+void allcombinations(string str){
 	int len = str.length();
+	char data[len];
 
 	// this helps in printing in lexicographic order and handle duplicate cases
 	sort(str.begin(), str.end());
-	util(str, data, 0, 0, len, r);
+
+	util(str, data, 0, 0, len);
 }
 
 int main(int argc, char const *argv[]){
-	string str = "abc";
-	allcombinations(str, 3);
+	string str = "aab";
+	allcombinations(str);
 	return 0;
 }

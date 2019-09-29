@@ -37,33 +37,36 @@ void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
 int main(int argc, char const *argv[])
 {
     vector<int>v1, v2;
-    for (int i = 0; i < 100; i++)
-    {
-        v1.push_back(1+2*i);
-        v2.push_back(2+2*i);
-    }
+    // for (int i = 0; i < 100; i++)
+    // {
+    //     v1.push_back(1+2*i);
+    //     v2.push_back(2+2*i);
+    // }
+        v1.push_back(1);v1.push_back(3);v1.push_back(5);v1.push_back(20);
+        v2.push_back(2);v2.push_back(80);v2.push_back(200);v2.push_back(400);
 
     // sort(v1.begin(), v1.end());
     // sort(v2.begin(), v2.end());
 
-    merge(v1, 100, v2, 100);
+    merge(v1, v1.size(), v2, v2.size());
 
     vector<int>v3;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 4; i++)
     {
         v3.push_back(v1[i]);
     }
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 4; i++)
     {
         v3.push_back(v2[i]);
     }
 
     int curr_max = INT_MIN;
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < 8; i++)
     {
-        if(v3[i] < curr_max)
-            printf("Fail");
-        curr_max = v3[i];
+        cout<<v3[i]<<" ";
+        // if(v3[i] < curr_max)
+        //     printf("Fail");
+        // curr_max = v3[i];
     }
     
     return 0;

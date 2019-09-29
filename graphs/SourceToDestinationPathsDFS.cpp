@@ -1,150 +1,86 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Graph{
+typedef vector<vector<int> > Graph;
 
-	public:
-		int V; // graph size
-		list <int> *adj; // pointer to an array of lists
+void printPath(vector<int> v){
+	int size = v.size();
 
-		Graph(int s){
-			V = s;
-			adj = new list<int>[s];
-		}
+	for (int i = 0; i < size; ++i)
+		cout<<v[i]<<" ";
+	
+	cout<<endl;
+}
 
-		void addEdge(int x, int y){
-			adj[x].push_back(y);
-		}
+// To check if this vertex is part of current curr_path already
+bool isVisited(vector<int> v, int vertex){
+	int size = v.size();
 
+	for (int i = 0; i < size; ++i)
+		if(v[i] == vertex)
+			return true;
 
-		void DFSUtil(int v, bool visited[]){
-			visited[v] = true;
-			cout<<v<<" ";
+	return false;
+}
 
-			list<int>::iterator it;
+void DFS(Graph g, vector<int> path, int s, int d, int &count){
+	int curr = path[path.size()-1];
 
-			for(it = adj[v].begin(); it != adj[v].end(); ++it){
-				if(!visited[*it]){
+	if(curr == d) count++;
 
-					DFSUtil(*it, visited);
-				}
-			}
-		}
+	int size = g[curr].size();
 
-		void DFS(){
-			bool visited[V+1];
-			memset(visited, 0, V+1);
-
-			DFSUtil(1, visited);
-		}
-
-		void BFS(){
-			queue<int> q;
-
-			q.push(1);
-
-			int node, size;
-			bool visited[V+1];
-			memset(visited, 0, V+1);
-
-			visited[1] = true;
-
-			while(!q.empty()){
-
-				size = q.size();
-
-				for (int i = 0; i < size; ++i){
-					node = q.front();
-					cout<<q.front()<<" ";
-
-					list<int>::iterator it;
-
-					for(it = adj[node].begin(); it != adj[node].end(); ++it){
-						if(!visited[*it]){
-							q.push(*it);
-							visited[*it] = true;
-						}
-					}
-					q.pop();
-				}
-
-				cout<<endl; 
-
-			}
-		}
-
-		void topologicalSort(){
-
-		}
-
-		void printPath(vector<int> v){
-			int size = v.size();
-
-			for (int i = 0; i < size; ++i)
-				cout<<v[i]<<" ";
-
-			cout<<endl;
-		}
-
-		void printAllPathsUtil(int s, int d, bool visited[], vector<int> &path){
-
-			visited[s] = true;
-			path.push_back(s);
-
-			if(s == d){
-				printPath(path);
-			}else {
-				list<int>::iterator it;	
-
-				for (it = adj[s].begin(); it != adj[s].end(); ++it){
-					if(!visited[*it])
-						printAllPathsUtil(*it, d, visited, path);
-				}
-			}
-
+	for (int i = 0; i < size; i++)
+	{
+		int adj = g[curr][i];
+		if(!isVisited(path, adj)) {
+			path.push_back(adj);
+			DFS(g, path, s, d, count);
 			path.pop_back();
-			visited[s] = false;
 		}
+	}
+}
 
-		void printAllPaths(int s, int d){
-			bool visited[V+1];
-			memset(visited, 0, V+1);
-			vector<int> path;
+void sourceToDestination(Graph g, int s, int d){
+	int path_count = 0;
 
-			printAllPathsUtil(s, d, visited, path);
+	vector<int>path;
+	path.push_back(s);
 
-		}
+	DFS(g, path, s, d, path_count);
+	
+	cout<<path_count<<endl;
 
-};
+}
 
+void solve(){
+	Graph g;
+	int V, E;
+	cin>>V>>E;
 
+	g.resize(V);
+	int u, v;
 
-int main(int argc, char const *argv[])
-{
-	Graph g(6);
-	g.addEdge(1, 2);
-	g.addEdge(1, 3);
-	g.addEdge(2, 4);
-	g.addEdge(2, 5);
-	g.addEdge(3, 1);
-	g.addEdge(3, 4);
-	g.addEdge(3, 5);
-	g.addEdge(4, 5);
+	for (int i = 0; i < E; i++)
+	{
+		cin>>u>>v;
+		g[u].push_back(v);
+	}
 
 	int s, d;
-	cout<<"Enter source and destination\n";
 	cin>>s>>d;
+	
+	sourceToDestination(g, s, d);
+}
+int main(int argc, char const *argv[])
+{
 
-	g.printAllPaths(s, d);
+	int t; cin>>t;
 
-	cout<<"DFS: ";
-	g.DFS();
-	cout<<endl;
+	while (t--)
+	{
+		solve();
+	}
 
-
-	cout<<"BFS: ";
-	g.BFS();
-	cout<<endl;
-
-	return 0;
+	return 0;	
 }

@@ -1,71 +1,40 @@
-#include <bits/stdc++.h>
+// https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1/?ref=self
 
+#include <bits/stdc++.h>
 using namespace std;
 
-struct node
+struct Node
 {
-	int data; 
-	int hd; 
-	node *left, *right; 
-
-	node(int key)
-	{
-		data = key;
-		hd = INT_MAX;
-		left = right = NULL;
-	}
+    int data; //data of the node
+    Node *left, *right; //left and right references
+    // Constructor of tree node
+    Node(int key)
+    {
+        data = key;
+        left = right = NULL;
+    }
 };
 
+void printBottomView(Node *root, map<int, int> &hd, int level, int *minlevel){
+    if (!root) return;
 
-void bottomView(node *root) {
+    hd[level] = root->data;
 
-	if(!root)
-		return;
+    if(level < *minlevel) *minlevel = level;
 
-	queue<node*> q;
-
-	map<int, int> hash;
-
-	root->hd = 0;
-	q.push(root);
-
-	while(!q.empty()){
- 
-		node* front =  q.front();
-
-		hash[front->hd] = front->data;
-
-		if(front->left){
-			front->left->hd = front->hd - 1;
-			q.push(front->left);
-		}
-		if(front->right){
-			front->right->hd = front->hd + 1;
-			q.push(front->right);
-		}
-
-		q.pop();
-
-	}
-
-	for(auto i = hash.begin(); i != hash.end(); ++i){
-		cout<<i->second<<" ";
-	}
-
+    printBottomView(root->left, hd, level-1, minlevel);
+    printBottomView(root->right, hd, level+1, minlevel);
 }
 
-int main()
+// Method that prints the bottom view.
+void bottomView(Node *root)
 {
-	node *root = new node(20);
-	root->left = new node(8);
-	root->right = new node(22);
-	root->left->left = new node(5);
-	root->left->right = new node(3);
-	root->right->left = new node(4);
-	root->right->right = new node(25);
-	root->left->right->left = new node(10);
-	root->left->right->right = new node(14);
-	cout << "Bottom view of the given binary tree :\n";
-	bottomView(root);
-	return 0;
+    map<int, int> hd;
+    int minlevel = INT_MAX;
+    printBottomView(root, hd, 0, &minlevel);
+    
+    while(hd.find(minlevel) != hd.end()){
+        cout<<hd[minlevel]<<" ";
+        minlevel++;
+    }
 }

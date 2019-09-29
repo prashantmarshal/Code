@@ -1,3 +1,6 @@
+// https://practice.geeksforgeeks.org/problems/minimum-platforms/0
+// Train platform
+
 #include <iostream>
 #include <algorithm>
 
@@ -8,6 +11,12 @@ struct interval
 	int s;
 	int e;
 };
+
+
+// Train comes - platform++
+// Train goes - platform--
+
+// Return peak platform count
 
 void findMaximumOverlappingInterval(interval intervals[], int n){
 	int stimes[n], etimes[n];
@@ -24,7 +33,7 @@ void findMaximumOverlappingInterval(interval intervals[], int n){
 	int i = 1, j = 0;
 
 	while(i < n && j < n){
-		if(stimes[i] < etimes[j]){
+		if(stimes[i] <= etimes[j]){
 			g++;
 			if(maxg < g){
 				maxg = g;
@@ -33,9 +42,6 @@ void findMaximumOverlappingInterval(interval intervals[], int n){
 			i++;
 		}else if(etimes[j] < stimes[i]){
 			g--;
-			j++;
-		}else{
-			i++;
 			j++;
 		}
 	}

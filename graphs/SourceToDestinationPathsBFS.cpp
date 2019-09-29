@@ -1,11 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Graph{
-
-public:
-	vector<vector <int> > v;
-};
+typedef vector<vector<int> > Graph;
 
 void printPath(vector<int> v){
 	int size = v.size();
@@ -16,12 +12,12 @@ void printPath(vector<int> v){
 	cout<<endl;
 }
 
-
-bool isVisited(vector<int> v, int node){
+// To check if this vertex is part of current curr_path already
+bool isVisited(vector<int> v, int vertex){
 	int size = v.size();
 
 	for (int i = 0; i < size; ++i)
-		if(v[i] == node)
+		if(v[i] == vertex)
 			return true;
 
 	return false;
@@ -30,51 +26,67 @@ bool isVisited(vector<int> v, int node){
 void sourceToDestination(Graph g, int s, int d){
 	
 	queue<vector<int> > q;
-	vector<int> path;
+	vector<int> curr_path;
 
-	path.push_back(s);
-	q.push(path);
+	curr_path.push_back(s);
+	q.push(curr_path);
+
+	int path_count = 0;
 
 	while(!q.empty()){
 
-		path = q.front();
+		curr_path = q.front();
 		q.pop();
 
-		if(path[path.size()-1] == d)
-			printPath(path);
+		int last = curr_path[curr_path.size()-1];
+		if(last == d)
+			// printPath(curr_path);
+			path_count++;
 
-		int next = path[path.size()-1];
-
-		int size = g.v[next].size();
+		int size = g[last].size();
 
 		for (int i = 0; i < size; ++i){
-			int adj = g.v[next][i];
-			if(!isVisited(path, adj)){
-				vector<int> v(path);
+			int adj = g[last][i];
+			
+			if(!isVisited(curr_path, adj)){
+				vector<int> v(curr_path);
 				v.push_back(adj);
 				q.push(v);
 			}
 		}
 	}
+
+	cout<<path_count<<endl;
 }
 
-int main(int argc, char const *argv[])
-{
+void solve(){
 	Graph g;
+	int V, E;
+	cin>>V>>E;
 
-	// we are indexing from 1
-	g.v.resize(6);
-	g.v[1].push_back(2);
-	g.v[2].push_back(3);
-	g.v[3].push_back(5);
-	g.v[2].push_back(5);
-	g.v[4].push_back(5);
-	g.v[5].push_back(4);
+	g.resize(V);
+	int u, v;
+
+	for (int i = 0; i < E; i++)
+	{
+		cin>>u>>v;
+		g[u].push_back(v);
+	}
 
 	int s, d;
-	cout<<"Enter s and d\n";
 	cin>>s>>d;
-
+	
 	sourceToDestination(g, s, d);
-	return 0;
+}
+int main(int argc, char const *argv[])
+{
+
+	int t; cin>>t;
+
+	while (t--)
+	{
+		solve();
+	}
+
+	return 0;	
 }

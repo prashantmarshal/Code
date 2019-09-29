@@ -19,8 +19,8 @@ int longestPalindromeSubseq(string s) {
             d[i][i+1] = 2;
     }
     
-    for(int len = 3; len < n; len++){
-        for (int i = 0; i < n-len+1; i++)
+    for(int len = 3; len <= n; len++){
+        for (int i = 0; i <= n-len+1; i++)
         {
             if(s[i] == s[i+len-1]){
                 d[i][i+len-1] = 2 + d[i+1][i+len-2];

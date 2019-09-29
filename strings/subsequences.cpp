@@ -5,9 +5,7 @@ using namespace std;
 void permuteUtil(string s, int start, int len){
 
 	if(start == len){
-		for(int i=0;i<=len;++i){
-			cout<<s.substr(0, i+1)<<endl;
-		}
+		cout<<s<<endl;
 		return;
 	}
 
