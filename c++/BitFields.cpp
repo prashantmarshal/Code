@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 struct test
@@ -34,11 +33,19 @@ public:
 	
 };
 
+struct test1
+{
+        short b: 15; // address 0 byte
+        char x: 1; // address 15th bit
+        int: 0; // start from next address = address 0 + 4 bytes
+        short a: 1; // address 4 byte
+};
+
 
 int main(int argc, char const *argv[])
 {
 	A *obj = new B();
-	cout<<obj->a;
-// D().f2();
-return 0;
+	cout<<sizeof(test1);
+	// D().f2();
+	return 0;
 }

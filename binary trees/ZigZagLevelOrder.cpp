@@ -2,16 +2,16 @@
 using namespace std;
 
 struct TreeNode {
-      int val;
-      TreeNode *left;
-      TreeNode *right;
-      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-  };
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
   
 vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
     stack<int> s;
     queue<TreeNode*>q;
-    vector<vector<int>> v;
+    vector<vector<int>> v;  
 
     if(!root)   
         return v;

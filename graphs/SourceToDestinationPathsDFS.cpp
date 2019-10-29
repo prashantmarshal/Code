@@ -24,33 +24,36 @@ bool isVisited(vector<int> v, int vertex){
 }
 
 void DFS(Graph g, vector<int> path, int s, int d, int &count){
-	int curr = path[path.size()-1];
+	// Push current vertex into the vector
+	path.push_back(s);		
+	
+	if(s == d) {
+		count++;
+		path.pop_back();
+		return;
+	}
 
-	if(curr == d) count++;
-
-	int size = g[curr].size();
+	int size = g[s].size();
 
 	for (int i = 0; i < size; i++)
 	{
-		int adj = g[curr][i];
-		if(!isVisited(path, adj)) {
-			path.push_back(adj);
-			DFS(g, path, s, d, count);
-			path.pop_back();
+		int adj = g[s][i];
+		if(!isVisited(path, adj)) { // To check for cycle, we do not want to go back to the vertex already included in the current stack
+			DFS(g, path, adj, d, count);
 		}
 	}
+
+	// Pop current vertex from the vector
+	path.pop_back();
 }
 
 void sourceToDestination(Graph g, int s, int d){
 	int path_count = 0;
-
 	vector<int>path;
-	path.push_back(s);
 
 	DFS(g, path, s, d, path_count);
 	
 	cout<<path_count<<endl;
-
 }
 
 void solve(){
@@ -72,6 +75,7 @@ void solve(){
 	
 	sourceToDestination(g, s, d);
 }
+
 int main(int argc, char const *argv[])
 {
 

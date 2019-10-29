@@ -1,57 +1,41 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int largestRectangleArea(vector<int>& heights) {
-    stack<int>s;
-    int n = heights.size();
-    int maxh = 0;
+class Solution {
+public:
 
-    for (int i = 0; i < n; i++)
-    {
-        if(s.empty() || heights[s.top()] < heights[i]) {  
+    int largestRectangleArea(vector<int>& heights) {
+        int n = heights.size();
+        if(n == 0) return 0;
 
-        } else
+        stack<int>s;
+        int maxh = 0;
+
+        for (int i = 0; i < n; i++)
         {
             while(!s.empty() && (heights[s.top()] >= heights[i])) {
                 int e = s.top();
                 s.pop();
 
-                int ep;
-                if(s.empty())
-                {
-                    ep = -1;
-                }
-                else
-                {
-                    ep = s.top();
-                }
-                
+                int ep = s.empty()?-1:s.top();
                 maxh = max(maxh, heights[e]*(i-ep-1));
             }
+            s.push(i);        
         }
-        s.push(i);        
+
+        int right_max;
+        if (!s.empty())
+            right_max = s.top();
+
+        while(!s.empty()) {
+            int e = s.top();
+            s.pop();
+
+            int ep = s.empty()?-1:s.top();
+
+            maxh = max(maxh, heights[e]*(right_max-ep));
+        }
+
+        return maxh;
     }
-
-    int right_max;
-    if (!s.empty())
-        right_max = s.top();
-    
-    while(!s.empty()) {
-        int e = s.top();
-        s.pop();
-
-        int ep;
-        if(s.empty())
-        {
-            ep = -1;
-        }
-        else
-        {
-            ep = s.top();
-        }
-
-        maxh = max(maxh, heights[e]*(right_max-ep));
-    }
-
-    return maxh;
-}
+};

@@ -118,6 +118,7 @@ int searchinancestors(vector<Node*> ancestors, int index){
 int _findClosest(Node *root, char k){
 	vector<Node*> ancestors;
 	Node* node = findNode(root, k, ancestors);
+	
 	const clock_t begin_time = clock();
 	int distance = INT_MAX_2;
 

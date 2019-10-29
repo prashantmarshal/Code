@@ -1,32 +1,24 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 
-int partition(int arr[], int l, int h){
+// See FirstMissingPositive for smaller approach
+int partition (int arr[], int low, int high)
+{
+    if(low == high) return low;
+    
+    int pivot = arr[high];
+    int i = 0, j = high-1;
 
-	int pivot = arr[h];
-
-	int i = l, j = h-1;
-
-	while(i <= j){
-		while(i < h && arr[i] < pivot)
-			++i;
-
-		while(j >= 0 && arr[j] >= pivot)
-			--j;
-
-		if(i < j){
-			swap(arr[i], arr[j]);
-			i++;
-			j--;
-		}
-	}
-	
-	swap(arr[i], arr[h]);
-
-	// i will point to the first location that is ahead of smaller elements index
-	return i;
+    for(; i<= high-1; ++i){
+        if(arr[i]<=pivot) continue;
+        while(j > i && arr[j] > pivot){ j--;}
+        swap(arr[i], arr[j]);
+        if(j <= i) break;
+    }
+    swap(arr[high], arr[i]);
+    
+    return i;
 }
 
 void quickSort(int arr[], int l, int h){
@@ -38,7 +30,6 @@ void quickSort(int arr[], int l, int h){
 
 	quickSort(arr, l, pivot-1);
 	quickSort(arr, pivot+1, h);
-
 }
 
 int main(int argc, char const *argv[])

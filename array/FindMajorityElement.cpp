@@ -1,58 +1,48 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int findmajorityelement(int *arr, int size){
-	if(size==1)
-		return arr[0];
-	int cnt=1;
-	int elem = arr[0];
-	for (int i = 1; i < size; ++i)
-	{	
-		if(arr[i]==elem){
-			cnt++;
-			continue;
-		}else{
-			cnt--;
-			if(cnt==0){
-				elem = arr[i];
-				cnt=1;
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+		// two majority elements (> n/3)
+        vector<int>res;
+        
+		int c1 = INT_MIN, cnt1 = 0;
+		int c2 = INT_MIN, cnt2 = 0;
+
+		for (int i = 0; i < nums.size(); i++)
+		{
+			if(nums[i] == c1){
+				cnt1++;
+			} else if(nums[i] == c2){
+				cnt2++;
+			} else {
+				if(cnt1 == 0){
+					c1 = nums[i], cnt1 = 1;
+				}else if(cnt2 == 0){
+					c2 = nums[i], cnt2 = 1;
+				} else {
+					cnt1--;
+					cnt2--;
+				}
 			}
 		}
-	}
-
-	cnt = 0;
-	for (int i = 0; i < size; ++i)
-	{
-		if(arr[i]==elem)
-			cnt++;
-	}
-
-	if(cnt >= size/2 +1)
-		return elem;
-	else
-		return -1;
-}
-
-int main(int argc, char const *argv[])
-{
-	int t;
-	cin>>t;
-
-	for (int i = 0; i < t; ++i)
-	{
-		int s;
-		cin>>s;
-		int arr[s];
-		for (int k=0;k<s; ++k)
+        
+		cnt1 = cnt2 = 0;
+		for (int i = 0; i < nums.size(); i++)
 		{
-			cin>>arr[k];
+			if(nums[i] == c1) cnt1++;
+			if(nums[i] == c2) cnt2++;
 		}
 
-		int ans = findmajorityelement(arr,s);
-		if(ans!=-1)
-			cout<<ans<<endl;
-		else
-		printf("NO Majority Element\n");
-	}
-	return 0;
-}
+		if(cnt1 > nums.size()/3){
+			res.push_back(c1);
+		}
+		if(cnt2 > nums.size()/3 && c1 != c2){
+			res.push_back(c2);
+		}
+		
+		return res;
+
+    }
+};

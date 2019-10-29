@@ -4,7 +4,7 @@ using namespace std;
 
 // Can be done in two logics
 // 1. Sort by start times
-// 2. If interval next start time  less than interval current end time, then this means they are conflicting
+// 2. If interval next start time is less than interval current end time, then this means they are conflicting
 // 3. Keep the one which has lesser finish time so that more space for future intervals
 
 // Same logic if sorted by finish time
@@ -16,7 +16,6 @@ bool compareInterval(vector<int> i1, vector<int> i2)
 
 class Solution {
 public:
-    
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
 
         int len = intervals.size();

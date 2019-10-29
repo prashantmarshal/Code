@@ -1,23 +1,32 @@
-// egg dropping puzzle
+#include <bits/stdc++.h>
+using namespace std;
 
-// floors and eggs
-int d[n+1][k+1];
+int d[10001][10001];
 
-for i = 0:n
-	d[i][1] = i; // if eggs are 1, then chances = number of floors
+int d[10001][10001];
 
-for i = 0:k
-	d[0][i] = 0;	// 0 chances for 0 floors
-	d[1][i] = 1;	// 1 chances for 1 floors
+class Solution {
+public:
+    int superEggDrop(int k, int n) {
 
-for floors: 1:n
-	for eggs: 1:k
-		d[floors][eggs] = 1 + max(d[floors-1][eggs-1] + d[n-floors][eggs]); // taking the worst case
-
-	result = min (result, d[floors][eggs]);
-
-return result;
-
+        for (int i = 0; i <= n; ++i)
+            d[i][1] = i; // if eggs are 1, then chances = number of floors
+		
+        int c = 0;
+        
+        for (int e = 2; e <= k; e++){
+            for (int f = 1; f <= n; ++f){
+                d[f][e] = INT_MAX-1;
+                for (int i = 1; i <= f; i++){
+                    c = 1 + max(d[i-1][e-1], d[f-i][e]);
+                    d[f][e] = min(d[f][e], c);
+                }                
+            }
+        }
+        
+        return d[n][k];
+    }
+};
 
 
 /*

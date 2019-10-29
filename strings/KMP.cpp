@@ -4,7 +4,7 @@ using namespace std;
 
 void createTemporaryArray(string pattern, int *array){
 	int i=1,j=0;
-	array[0] = 0;
+	array[0] = 0;	
 	for(;i<pattern.length();){
 		if(pattern[i] == pattern[j]){
 			array[i] = j+1;

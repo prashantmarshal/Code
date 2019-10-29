@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int dp[22][22];
 void clear(){
     memset(dp,-1,sizeof dp);
 }
+
 int dfs(vector<int>* graph,int root,int v,int k){
     if(k==0 && root==v) return 1;
     if(k==0 && root!=v) return 0;

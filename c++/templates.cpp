@@ -26,10 +26,30 @@ void Array<T>::print() {
         cout<<" "<<*(ptr + i);
     cout<<endl;
 }
- 
+
+template <typename X>
+class Test
+{
+public:
+    static X var;
+};
+
+
+template<class X> 
+X Test<X>::var = 5; 
+
+class Test2
+{
+public:
+    static int var;
+};
+
+
 int main() {
-    int arr[5] = {1, 2, 3, 4, 5};
-    Array<int> a(arr, 5);
-    a.print();
+    // int arr[5] = {1, 2, 3, 4, 5};
+    // Array<int> a(arr, 5);
+    // a.print();
+    Test<string> p;
+    cout<<p.var<<endl;
     return 0;
 }

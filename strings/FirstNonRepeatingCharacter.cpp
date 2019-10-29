@@ -17,20 +17,21 @@ int calcSize(char str[]){
 int firstNonRepeatingCharacter(char *str){
 
 	int size = 256;
-	counts countarr[size];
+	counts hash[size];
 
 	for(int i=0; i<size; ++i){
-		countarr[str[i]].count++;
-		if(countarr[str[i]].count == 1)
-			countarr[str[i]].index = i;
+		hash[str[i]].count++;
+		if(hash[str[i]].count == 1)
+			hash[str[i]].index = i;
 	}
 
 	int index = INT_MAX;
 
+	// If there was only one traversal allowed, we will keep DLL and append new unique elements at the end
 	for(int i=0; i<size; ++i){
-		if(countarr[str[i]].count == 1){
-			if(countarr[str[i]].index < index)
-				index = countarr[str[i]].index;
+		if(hash[str[i]].count == 1){
+			if(hash[str[i]].index < index)
+				index = hash[str[i]].index;
 		}
 	}
 

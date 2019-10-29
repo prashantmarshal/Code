@@ -1,11 +1,9 @@
 // C program to Print all combinations
 // of balanced parentheses
-# include<stdio.h>
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
 using namespace std;
 
-# define MAX_SIZE 100
 
 void count(int n, int open, int close, string str){
 	if(close == n/2){
@@ -30,7 +28,6 @@ int main()
 {
 	int n = 6;
 	printParenthesis(n);
-	getchar();
 	return 0;
 }
 

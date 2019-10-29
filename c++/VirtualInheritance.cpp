@@ -12,7 +12,7 @@ public:
 	
 };
 
-class Derived1: public Base
+class Derived1: virtual public Base
 {
 public:
 	int d1;
@@ -20,7 +20,7 @@ public:
 		d1 = 10;
 	}
 };
-/*
+
 class Derived2: virtual public Base
 {
 public:
@@ -28,9 +28,9 @@ public:
 	Derived2(){
 		d2 = 15;
 	}
-};*/
+};
 
-class DD//: public Derived1, public Derived2
+class DD: virtual public Derived1, virtual public Derived2
 {
 public:
 	int dd;
@@ -41,10 +41,21 @@ public:
 
 int main()
 {
-	Derived1 d;
-	// DD d;
+	// Derived1 d;
+	DD d;
 	int *ptr = (int*)&d;
+	cout<<ptr<<" "<<sizeof(ptr)<<endl;
 	cout<<sizeof(d)<<endl;
+	cout<<ptr<<" "<<*ptr<<endl;
+	ptr++;
+	cout<<ptr<<" "<<*ptr<<endl;
+	ptr++;
+	cout<<*ptr<<endl;
+	ptr++;
+	cout<<*ptr<<endl;
+	ptr++;
+	cout<<*ptr<<endl;
+	ptr++;
 	cout<<*ptr<<endl;
 	ptr++;
 	cout<<*ptr<<endl;
@@ -54,14 +65,8 @@ int main()
 	cout<<*ptr<<endl;
 	ptr++;
 	cout<<*ptr<<endl;
-	/*ptr++;
-	cout<<*ptr<<endl;
 	ptr++;
 	cout<<*ptr<<endl;
-	ptr++;
-	cout<<*ptr<<endl;
-	ptr++;
-	cout<<*ptr<<endl;*/
 
 	return 0;
 }

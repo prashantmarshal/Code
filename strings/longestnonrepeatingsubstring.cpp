@@ -1,38 +1,38 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-
 int longnonrepeatsub(string s){
-	map<char, int> hash;
-	int beg = 0, len = 1, longest = 1;
-	int size = s.length();
-	hash[s[0]] = 0;
+	if (s == "") return 0;
+	
+	int hash[26];
+	memset(hash, -1, 26);
 
-	int i = 1;
+	int start_index = 0, len = 0, maxlen = 1;
+	int size = s.length();
+	
+	int i = 0;
 
 	while(i < size){
-		if(hash.find(s[i]) != hash.end()){
+		if(hash[s[i]-'a'] != -1){
 			// if occurred before current starting index
-			if(hash[s[i]] < beg){
-				// updated element index
-				hash[s[i]] = i;
+			if(hash[s[i]-'a'] < start_index){
 				len++;
-				longest = max(longest, len);
-			}else {
+			}else{
 				// update starting index
-				beg = hash[s[i]] + 1;
-				hash[s[i]] = i;
-				len = i-beg+1;
+				start_index = hash[s[i]-'a'] + 1;
+				len = i-start_index+1;
 			}
 		}else{
-			hash[s[i]] = i;
 			len++;
-			longest = max(longest, len);
 		}
+
+		// updated element index
+		hash[s[i]-'a'] = i;
+		maxlen = max(maxlen, len);
 		++i;
 	}
-	return longest;
+
+	return maxlen;
 }
 
 int main(int argc, char const *argv[])
@@ -42,3 +42,40 @@ int main(int argc, char const *argv[])
 	cout<<longnonrepeatsub(s)<<endl;
 	return 0;
 }
+
+
+/* 
+Leetcode having ' ' (32) character
+
+if (s == "") return s.length();
+
+int hash[256];
+for(int i=0; i<256; ++i) hash[i] = -1;
+
+int start_index = 0, len = 0, maxlen = 1;
+int size = s.length();
+
+int i = 0;
+
+while(i < size){
+	if(hash[s[i]-' '] != -1){
+		// if occurred before current starting index
+		if(hash[s[i]-' '] < start_index){
+			len++;
+		}else{
+			// update starting index
+			start_index = hash[s[i]-' '] + 1;
+			len = i-start_index+1;
+		}
+	}else{
+		len++;
+	}
+
+	// updated element index
+	hash[s[i]-' '] = i;
+	maxlen = max(maxlen, len);
+	++i;
+}
+
+return maxlen;
+*/

@@ -21,7 +21,7 @@ int findDuplicate(int* nums) {
 		fast = nums[fast];
 		cout<<slow<<" "<<fast<<endl;
 	}
-
+	std::vector<char> v;
 	return fast;
 }
 
