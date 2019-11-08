@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 void printdiagonal(int arr[5][4], int R, int C){

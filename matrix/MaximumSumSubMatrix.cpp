@@ -6,7 +6,9 @@ using namespace std;
 int arr[10000][10000];
 int ROWS, COLS;
 
-int f(int size, int si, int col){
+
+// Create prefix array of each column of matrix and return sum in O(1)
+int util(int size, int si, int col){
 	int sum = 0;
 
 	for (int i = si; i < si + size; ++i){
@@ -26,7 +28,7 @@ void maximumSumSubMatrix(int rows, int cols){
 		for(int si = 0; si <= rows - size; ++si){
 			temp = -1000;
 			for(int y = 0; y < cols; ++y){
-				int newsum = f(size, si, y);
+				int newsum = util(size, si, y);
 				temp = max(temp + newsum, newsum);
 
 				if(total < temp){

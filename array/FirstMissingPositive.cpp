@@ -9,20 +9,21 @@ public:
         //Segregate +ve -ve
         int i = -1, j = 0;
         for(; j < size; ++j){
-            if(arr[j] <= 0) swap(arr[++i], arr[j]);
+            if(arr[j] > 0) swap(arr[++i], arr[j]);
         }
 
-        for (j = i+1; j < size; j++)
+        // i points to right most positive element
+        for (j = 0; j <= i; j++)
         {
             int e = abs(arr[j]);
-            if(e < size-i) // e+i < size gives integer overflow
-                arr[e+i] = -1*abs(arr[e+i]);
+            if(e <= i+1)
+                arr[e-1] = -1*abs(arr[e-1]);
         }
 
-        for (j = i+1; j < size; j++)
+        for (j = 0; j <= i; j++)
         {
-            if(arr[j] > 0) return j-i;
+            if(arr[j] > 0) return j+1;
         }
-        return size-i;
+        return i+1;
     }
 };

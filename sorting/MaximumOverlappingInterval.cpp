@@ -1,9 +1,7 @@
 // https://practice.geeksforgeeks.org/problems/minimum-platforms/0
 // Train platform
 
-#include <iostream>
-#include <algorithm>
-
+#include <bits/stdc++.h>
 using namespace std;
 
 struct interval
@@ -17,6 +15,8 @@ struct interval
 // Train goes - platform--
 
 // Return peak platform count
+
+// This is same as incrementing at start of prefix array and decrementing at end of prefix array
 
 void findMaximumOverlappingInterval(interval intervals[], int n){
 	int stimes[n], etimes[n];

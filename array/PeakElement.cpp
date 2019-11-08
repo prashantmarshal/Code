@@ -3,31 +3,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int l[100001], r[100001];
-
-int solve(vector<int> &A) {
-    int size = A.size();
+class Solution {
+public:
     
-    int currmax = 0;
-
-    for (int i = 0; i < size; i++)
-    {
-        l[i] = currmax;
-        currmax = max(currmax, A[i]);
+    int findPeakElement(vector<int>& nums) {
+        int low = 0, high = nums.size()-1;
+        
+        while(low < high){
+            int mid = (low+high)/2;
+            
+            if(mid == 0) {
+                return nums[0] > nums[1] ? 0 : 1;
+            }
+            
+            if(nums[mid] > nums[mid-1] && nums[mid] > nums[mid+1]){
+                return mid;
+            }
+            
+            if(nums[mid] < nums[mid+1]){
+                low = mid+1;
+            } else {
+                high = mid-1;
+            }
+        }
+        
+        return low;
     }
-
-    currmax = 0;
-    for (int i = size-1; i >= 0; i--)
-    {
-        r[i] = currmax;
-        currmax = max(currmax, A[i]);
-    }
-    
-    for (int i = 0; i < size; i++)
-    {
-        if(A[i]>= max(l[i], r[i]))
-        return A[i];
-    }
-    
-    return -1;
-}
+};

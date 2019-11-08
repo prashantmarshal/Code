@@ -9,12 +9,11 @@ void printZigZag(int n){
 	int temp;
 	for (int i = 0; i < n-1; ++i)
 	{
+		temp = arr[i];
 		if(flag){
-			temp = arr[i];
 			arr[i] = min(arr[i], arr[i+1]);
 			arr[i+1] = max(temp, arr[i+1]);
 		}else{
-			temp = arr[i];
 			arr[i] = max(arr[i], arr[i+1]);
 			arr[i+1] = min(temp, arr[i+1]);
 		}

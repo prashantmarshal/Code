@@ -15,7 +15,7 @@ bool operator<(const element& a, const element& b){
 
 void kSortedMerge(int arr[][3], int n){
 
-	priority_queue<element > pq;
+	priority_queue<element> pq;
 
 	element elements[n][n];
 
