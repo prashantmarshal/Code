@@ -18,7 +18,7 @@ void minThrows(){
     for (int i = 1; i <= 30; i++)
     {
         graph.push_back(vector<int>());
-        // cout<<i<< " " ;
+        
         for (int j = 1; j <= 6; j++)
         {
             if(i+j > 30) continue;
@@ -41,7 +41,7 @@ void minThrows(){
 
     while(!q.empty()){
         int size = q.size();
-        // cout<<size<< " ";
+
         for(int j = 0; j < size; ++j){
             int top = q.front();
             visited[top-1] = true;

@@ -8,12 +8,12 @@ void DFS(std::vector< pair<int, int> >graph[], int src, std::vector<bool> &visit
 
 	visited[src] = 1;
 
-	/* how many vertices are connected to this vertex via edges */
-	int size2 = graph[src].size();
+	/* how many vertices are connected to this vertex */
+	int len = graph[src].size();
 
 	pair<int, int> set;
 
-	for (int i = 0; i < size2; ++i)
+	for (int i = 0; i < len; ++i)
 	{
 		set = graph[src][i];
 
@@ -27,7 +27,9 @@ void DFS(std::vector< pair<int, int> >graph[], int src, std::vector<bool> &visit
 			}
 
 			curr_len -= set.second;
-			visited[set.first] = false; // this statement makes it work for cyclic graphs also
+			// this statement makes it work for cyclic graphs also
+			// as it explores all DFS paths
+			visited[set.first] = false; 
 
 		}
 

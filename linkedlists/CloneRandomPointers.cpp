@@ -1,6 +1,5 @@
-#include <bits/stdc++.h>
-using namespace std;
-
+/*
+// Definition for a Node.
 class Node {
 public:
     int val;
@@ -15,18 +14,18 @@ public:
         random = _random;
     }
 };
-
+*/
 class Solution {
 public:
-    Node* copyRandomList(Node* head) {
-        ///Using method without extra space
+        Node* copyRandomList(Node* head) {
+        //Using method without extra space
 
         // 1. Inserting in between
         Node *curr = head, *head_clone = NULL, *curr_clone = NULL;
 
         while(curr) {
             curr_clone = new Node(curr->val, NULL, NULL);
-
+            
             if(!head_clone)
                 head_clone = curr_clone;
 
@@ -34,25 +33,22 @@ public:
             curr->next = curr_clone;
             curr = curr_clone->next;
         }
-
+        
         curr = head;
-        curr_clone = head_clone;
 
         // 2. Fix random pointers
         while(curr){
+            curr_clone = curr->next;
+
             if(curr->random){
                 curr_clone->random = curr->random->next;            
             } else {
                 curr_clone->random = NULL;
             }
-
+            
             curr = curr_clone->next;
-            if(!curr)
-                break;
-
-            curr_clone = curr->next;
         }
-
+            
         curr = head;
         curr_clone = head_clone;
 
@@ -60,10 +56,10 @@ public:
         while(curr){
             curr->next = curr_clone->next;
             curr = curr->next;
-
+            
             if(!curr)
                 break;
-
+            
             curr_clone->next = curr->next;
             curr_clone = curr_clone->next;
         }
