@@ -1,56 +1,22 @@
-#include <bits/stdc++.h>
+// https://leetcode.com/problems/longest-increasing-subsequence/
 
-using namespace std;
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> dp(n, 1);
+        
+        int k, ans = 0;
+        for(int i = 1; i < n; ++i) {
+            k = i;
+            while(--k >= 0) {
+                if (arr[k] < arr[i]) {
+                    dp[i] = max(dp[i], dp[k]+1);
+                }
+            }
+            ans = max(ans, dp[i]);
+        }
 
-
-int arr[2000];
-
-
-int longestIncreasingSubsequence(int n){
-	
-	int d[n];
-
-	for (int i = 0; i < n; ++i)
-	{
-		d[i] = 1;
-	}
-
-	d[0] = 1;
-
-	for (int i = 1; i < n; ++i)
-	{
-		for (int j = 0; j < i; ++j)
-		{
-			if(arr[j] < arr[i]){
-				d[i] = max(d[i], d[j] + 1);
-			}
-		}
-	}
-
-	int maxLen = 0;
-
-	for (int i = 0; i < n; ++i)
-	{
-		maxLen = max(maxLen, d[i]);
-	}
-
-	return maxLen;
-
-}
-
-int main(int argc, char const *argv[])
-{
-	int t, n;
-	cin>>t;
-
-	while(t--){
-		cin>>n;
-
-		for (int i = 0; i < n; ++i)
-		{
-			cin>>arr[i];
-		}
-		cout<<longestIncreasingSubsequence(n)<<endl;
-	}
-	return 0;
-}
+        return ans;
+    }
+};

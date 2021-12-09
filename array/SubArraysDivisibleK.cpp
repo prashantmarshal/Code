@@ -18,7 +18,7 @@ int subarraysDivByK(vector<int>& A, int K) {
             int freq = f[curr_sum];
             if(freq > 0){
                 cnt += freq;
-            }    
+            }
             f[curr_sum]++;
         }
 

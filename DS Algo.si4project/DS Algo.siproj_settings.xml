@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectSettings
+	AppVer="4.00.0120"
+	AppVerMinReader="4.00.0034"
+	GlobalConfiguration="1"
+	GlobalWorkspace="0"
+	LocalsInDb="0"
+	IndexMembers="1"
+	IndexFragments="1"
+	UseMasterFileList="0"
+	SourceDir="..\"
+	BackupDir="%PROJECT_DATA_DIR%\Backup"
+	MasterFileList="%PROJECT_SOURCE_DIR%\%PROJECT_NAME%_filelist.txt"
+	IsImportProject="0"
+	>
+	<Imports>
+		<ImportedLibs>
+			<item
+				LibraryFile="C:\Users\prashant_patil3\Desktop\Code"
+				LibraryProject="C:\Users\prashant_patil3\Documents\Source Insight 4.0\Projects\_import_C__Users_prashant_patil3_Desktop_Code\_import_C__Users_prashant_patil3_Desktop_Code"
+				/>
+		</ImportedLibs>
+	</Imports>
+	<ParseConditions>
+		<Defines/>
+	</ParseConditions>
+</ProjectSettings>

@@ -3,80 +3,42 @@
  * struct ListNode {
  *     int val;
  *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
-ListNode* reverseList(ListNode *head, ListNode **res) {
-	if(!head) return NULL;
-
-	ListNode *temp = reverseList(head->next, res);
-	if(temp) {
-		if(*res == NULL)
-			*res = temp;
-		temp->next = head;
-	}
-
-	return head;
-}
-
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-    	stack<int>s1, s2;
-    	ListNode *t = l1;
-    	while(t){
-    		s1.push(t->val);
-    		t = t->next;
-    	}
+        stack<int> s1, s2;
+        ListNode *c1 = l1, *c2 = l2;
+        while(c1 || c2) {
+            if(c1) s1.push(c1->val);
+            if(c2) s2.push(c2->val);
+            c1 = c1 ? c1->next : nullptr;
+            c2 = c2 ? c2->next : nullptr;
+        }
 
-    	if(s1.empty()) return l2;
+        ListNode *res = new ListNode();
+        ListNode *ret = res;
+        stack<int> result;
 
-    	t = l2;
-    	while(t){
-    		s2.push(t->val);
-    		t = t->next;
-    	}
+        int sum = 0, carry = 0;
+        while(!s1.empty() || !s2.empty() || carry) {
+            sum = (!s1.empty() ? s1.top() : 0) + (!s2.empty() ? s2.top() : 0) + carry;
+            carry = sum / 10;
+            sum = sum%10;
+            result.push(sum);
+            if(!s1.empty()) s1.pop(); if(!s2.empty()) s2.pop();
+        }
 
-		if(s2.empty()) return l1;
-    	
-    	ListNode *dummy = new ListNode(0);
-    	ListNode *head = dummy;
+        while(!result.empty()) {
+            res->next = new ListNode(result.top());
+            result.pop();
+            res = res->next;
+        }
 
-    	int carry = 0;
-		while(!s1.empty() && !s2.empty()){
-			int sum = s1.top() + s2.top() + carry;
-			carry = sum/10;
-			sum = sum%10;
-			head->next = new ListNode(sum);
-			head = head->next;
-			s1.pop();
-			s2.pop();
-		}
-
-		while(!s1.empty()){
-			int sum = s1.top() + carry;
-			s1.pop();
-			carry = sum/10;
-			sum = sum%10;
-			head->next = new ListNode(sum);
-			head = head->next;
-		}		
-
-
-		while(!s2.empty()){
-			int sum = s2.top() + carry;
-			s2.pop();
-			carry = sum/10;
-			sum = sum%10;
-			head->next = new ListNode(sum);
-			head = head->next;
-		}		
-
-		ListNode *res = NULL;
-		reverseList(dummy->next, &res);
-		return res;
-	}
+        return ret->next;
+    }
 };
-
-

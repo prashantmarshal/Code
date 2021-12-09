@@ -1,55 +1,49 @@
-#include <bits/stdc++.h>
-#include <map>
-#include <unordered_map>
-using namespace std;
+class LRUCache {
+private:
+    int size;
+    unordered_map<int, list<pair<int, int>>::iterator> hash;
+    list<pair<int, int>> myList;
+    
+    // Puts the given key to the front
+    void updateList(int key, int value) {
+        if (hash.count(key)) {
+            myList.erase(hash[key]);
+        }
+        myList.push_front(make_pair(key, value));
+        hash[key] = myList.begin();
+    }
 
-
-class LRU{
-	list<int> q;
-	unordered_map<int, list<int>::iterator> hash;
-	int size;
+    // Removes the old key from the myList
+    void evict() {
+        hash.erase(myList.back().first);
+        myList.pop_back();
+    }
 
 public:
-
-	LRU(int size = 10){
-		this->size = size;
-	}
-
-	void refer(int key){
-
-		// if key is not present
-		if(hash.find(key) == hash.end()){
-			
-			if(q.size() == size){
-				int last = q.back();
-				q.pop_back();
-				hash.erase(last);
-			}
-		}else{
-			q.erase(hash[key]);
-		}
-
-		q.push_front(key);
-		hash[key] = q.begin();
-	}
-
-	void display(){
-		list<int>::iterator it;
-
-		for (it = q.begin(); it != q.end(); ++it)
-			cout<<*it<<" ";
-		cout<<endl;
-	}
+    LRUCache(int capacity) {
+        size = capacity;
+    }
+    
+    int get(int key) {
+        if (hash.count(key) == 0) {
+            return -1;
+        }
+        updateList(key, hash[key]->second);
+        return hash[key]->second;
+    }
+    
+    void put(int key, int value) {
+        // If the myList is full and a new key is to be added, evict the oldest key
+        if (myList.size() == size && hash.count(key) == 0) {
+            evict();
+        }
+        updateList(key, value);
+    }
 };
 
-int main(int argc, char const *argv[])
-{
-	LRU cache(5);
-	int n;
-	while(cin>>n){
-		cache.refer(n);
-		cout<<"Current cache: ";
-		cache.display();
-	}
-	return 0;
-}
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */

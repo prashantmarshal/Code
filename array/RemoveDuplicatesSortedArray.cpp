@@ -1,23 +1,15 @@
-#include<bits/stdc++.h>
-using namespace std;
+// https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 
-
-int removeDuplicates(vector<int> &A){
-    int x = A.size();
-    
-    if(x <= 1)
-        return x;
-
-    int lastval = A[0];
-    int j = 1;
-    for (int i = 1; i < x; i++)
-    {
-        if(A[i] == lastval) {
-            continue;
+class Solution {
+public:
+    int removeDuplicates(vector<int>& arr) {
+        int iter = 0;
+        for(int i = 0; i < arr.size(); ++i) {
+            arr[iter++] = arr[i];
+            while(i+1 < arr.size() && arr[i+1] == arr[i]) {
+                i++;
+            }
         }
-        lastval = A[i];
-        A[j++] = lastval;
+        return iter;
     }
-
-    return j;
-}
+};

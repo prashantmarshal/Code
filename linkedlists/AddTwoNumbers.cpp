@@ -2,30 +2,32 @@
 using namespace std;
 
  struct ListNode {
-     int val;
+    int val;
     ListNode *next;
-     ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x) : val(x), next(NULL) {}
  };
 
 class Solution {
 public:
 
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode *T = new ListNode(0), *p = T;
-        int extra = 0;
-
-        while (l1 || l2 || extra) {
-            int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + extra;
-            extra = sum / 10;
-            p->next = new ListNode(sum % 10);
-            p = p->next;
+        int carry = 0, sum = 0;
+        ListNode* res = new ListNode();
+        ListNode *ret = res;
+            
+        while(l1 || l2 || carry) {
+            sum = carry + (l1 ? l1->val : 0) + (l2 ? l2->val : 0);
+            res->next = new ListNode();
+            res->next->val = sum % 10;
+ 
+            carry = sum / 10;
+            res = res->next;            
             l1 = l1 ? l1->next : l1;
             l2 = l2 ? l2->next : l2;
         }
         
-        // Free memory
-        p = T->next;
-        delete(T);
-        return p;
+        res = ret->next;
+        delete(ret);
+        return res;
     }
-};
+};  

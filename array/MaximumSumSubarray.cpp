@@ -1,38 +1,23 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int arr[10000];
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if (nums.size() == 0) {
+            return 0;   
+        }
+        
+        int curr_sum = nums[0], max_sum = nums[0];
+        for (int i = 1; i < nums.size(); ++i) {
+            curr_sum = max(curr_sum + nums[i], nums[i]);
+            max_sum = max(max_sum, curr_sum);
+        }
+        
+        return max_sum;
+    }
+};
 
-// kadane
-int maxSubarray(int n){
-	if(n==0) return 0;
-
-	// curr = 0 would be incorrect if all elements are negative
-	int curr = arr[0];
-	int total = arr[0];
-
-	for (int i = 1; i < n; ++i)
-	{
-		curr = max(curr+arr[i], arr[i]);
-		total = max(total, curr);
-	}
-
-	return total;
-}
-
-
-int main(int argc, char const *argv[])
-{
-	int t;
-	cin>>t;
-	int n;
-	while(t--){
-		cin>>n;
-		for (int i = 0; i < n; ++i)
-			cin>>arr[i];
-
-		cout<<maxSubarray(n)<<endl;
-	}
-	return 0;
-}
+// Approach:
+// We want to provided the maximum value subarray to the rest of the array.
+// Hence, either [previous+current] OR [current] is selected.

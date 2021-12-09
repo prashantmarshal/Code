@@ -1,23 +1,18 @@
-#include <bits/stdc++.h>
-using namespace std;
+// https://leetcode.com/problems/subarray-sum-equals-k/
 
-int subarraysEqualToK(vector<int>& A, int K) {
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int, int> sums;
+        sums[0]++; // 0 sum is already present
 
-    unordered_map<int,int>f;
+        int cum_sum = 0, count = 0; // cumulative sum
+        for (int i = 0; i < nums.size(); i++) {
+            cum_sum += nums[i];
+            count += sums[cum_sum-k];
+            sums[cum_sum]++;
+        }
 
-    int curr_sum = 0, cnt = 0;
-    f[curr_sum] = 1;
-
-    for (int i = 0; i < A.size(); i++)
-    {
-        curr_sum = curr_sum + A[i];
-        int freq = f[curr_sum - K];
-        if(freq > 0){
-            cnt += freq;
-        }    
-        f[curr_sum]++;
+        return count;
     }
-
-    return cnt;   
-
-}
+};

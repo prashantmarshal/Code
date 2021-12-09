@@ -45,6 +45,28 @@ public:
         }
     }
 
+    void _bfs(vector<vector<int>> &g, int src, int dest, vector<vector<int>> &res) {
+        queue<vector<int>> q;
+        q.push(vector<int>{src});
+
+        vector<int> path;
+        while(!q.empty()){
+            path = q.front(); path.pop_back();
+            int curr_node = path[path.size()-1];
+
+            if(curr_node == dest){
+                res.push_back(path);
+                continue;
+            }
+
+            for(auto i: g[curr_node]) {
+                path.push_back(i);
+                q.push(path);
+                path.pop_back();
+            }
+        }
+    }
+
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
         int n = graph.size();
         vector<int> res;
@@ -54,8 +76,9 @@ public:
             return v;
         }
 
-        dfs(graph, 0, n-1, res, v);
-        bfs(graph, 0, n-1, res, v);
+        // dfs(graph, 0, n-1, res, v);
+        // bfs(graph, 0, n-1, res, v);
+        _bfs(graph, 0, n-1, v);
         return v;
     }
 };
